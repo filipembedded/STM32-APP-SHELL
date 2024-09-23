@@ -1,0 +1,39 @@
+{
+    "version": 4,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 20,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "stm32f103_debug",
+            "displayName": "STM32F103 DEBUG",
+            "toolchainFile": "CMake/arm-none-eabi-gcc.cmake",
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "DEVICE": {
+                    "type": "STRING",
+                    "value": "stm32f103"
+                },
+                "CORE": {
+                    "type": "STRING",
+                    "value": "-mcpu=cortex-m3"
+                },
+                "MAIN_REL_PATH": {
+                    "type": "STRING",
+                    "value": "Core/App"
+                }
+            }
+        },
+        {
+            "name": "stm32f103_release",
+            "inherits": "stm32f103_debug",
+            "displayName": "STM32F103 RELEASE",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        }
+    ]   
+}
