@@ -279,6 +279,20 @@ include /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/stm32f103.dir/ll_drivers/stm32f1xx_ll_utils.c.s"
 	cd /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103 && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/ll_drivers/stm32f1xx_ll_utils.c -o CMakeFiles/stm32f103.dir/ll_drivers/stm32f1xx_ll_utils.c.s
 
+/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/ll_drivers/system_stm32f1xx.c.obj: /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/flags.make
+/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/ll_drivers/system_stm32f1xx.c.obj: /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/ll_drivers/system_stm32f1xx.c
+/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/ll_drivers/system_stm32f1xx.c.obj: /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/ll_drivers/system_stm32f1xx.c.obj"
+	cd /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103 && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/ll_drivers/system_stm32f1xx.c.obj -MF CMakeFiles/stm32f103.dir/ll_drivers/system_stm32f1xx.c.obj.d -o CMakeFiles/stm32f103.dir/ll_drivers/system_stm32f1xx.c.obj -c /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/ll_drivers/system_stm32f1xx.c
+
+/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/ll_drivers/system_stm32f1xx.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/stm32f103.dir/ll_drivers/system_stm32f1xx.c.i"
+	cd /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103 && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/ll_drivers/system_stm32f1xx.c > CMakeFiles/stm32f103.dir/ll_drivers/system_stm32f1xx.c.i
+
+/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/ll_drivers/system_stm32f1xx.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/stm32f103.dir/ll_drivers/system_stm32f1xx.c.s"
+	cd /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103 && /usr/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/ll_drivers/system_stm32f1xx.c -o CMakeFiles/stm32f103.dir/ll_drivers/system_stm32f1xx.c.s
+
 # Object files for target stm32f103
 stm32f103_OBJECTS = \
 "CMakeFiles/stm32f103.dir/ll_drivers/stm32f1xx_ll_adc.c.obj" \
@@ -295,7 +309,8 @@ stm32f103_OBJECTS = \
 "CMakeFiles/stm32f103.dir/ll_drivers/stm32f1xx_ll_tim.c.obj" \
 "CMakeFiles/stm32f103.dir/ll_drivers/stm32f1xx_ll_usart.c.obj" \
 "CMakeFiles/stm32f103.dir/ll_drivers/stm32f1xx_ll_usb.c.obj" \
-"CMakeFiles/stm32f103.dir/ll_drivers/stm32f1xx_ll_utils.c.obj"
+"CMakeFiles/stm32f103.dir/ll_drivers/stm32f1xx_ll_utils.c.obj" \
+"CMakeFiles/stm32f103.dir/ll_drivers/system_stm32f1xx.c.obj"
 
 # External object files for target stm32f103
 stm32f103_EXTERNAL_OBJECTS =
@@ -315,9 +330,10 @@ stm32f103_EXTERNAL_OBJECTS =
 /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/libstm32f103.a: /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/ll_drivers/stm32f1xx_ll_usart.c.obj
 /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/libstm32f103.a: /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/ll_drivers/stm32f1xx_ll_usb.c.obj
 /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/libstm32f103.a: /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/ll_drivers/stm32f1xx_ll_utils.c.obj
+/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/libstm32f103.a: /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/ll_drivers/system_stm32f1xx.c.obj
 /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/libstm32f103.a: /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/build.make
 /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/libstm32f103.a: /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking C static library libstm32f103.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking C static library libstm32f103.a"
 	cd /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103 && $(CMAKE_COMMAND) -P CMakeFiles/stm32f103.dir/cmake_clean_target.cmake
 	cd /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103 && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/stm32f103.dir/link.txt --verbose=$(VERBOSE)
 

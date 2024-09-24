@@ -78,6 +78,7 @@ set(WARNING_OPTIONS
 	-Wno-unused-parameter	# surpress "unused" variable warnings
 	-Wno-unused-function	# surpress "unused" function warnings
 	-Wno-enum-conversion	# surpress enum conversion warning
+	-Wno-main				# surpress main return value warning
 )
 
 # =============================================================

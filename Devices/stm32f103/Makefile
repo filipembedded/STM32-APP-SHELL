@@ -490,6 +490,30 @@ ll_drivers/stm32f1xx_ll_utils.c.s:
 	cd /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build && $(MAKE) $(MAKESILENT) -f /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/build.make /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/ll_drivers/stm32f1xx_ll_utils.c.s
 .PHONY : ll_drivers/stm32f1xx_ll_utils.c.s
 
+ll_drivers/system_stm32f1xx.obj: ll_drivers/system_stm32f1xx.c.obj
+.PHONY : ll_drivers/system_stm32f1xx.obj
+
+# target to build an object file
+ll_drivers/system_stm32f1xx.c.obj:
+	cd /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build && $(MAKE) $(MAKESILENT) -f /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/build.make /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/ll_drivers/system_stm32f1xx.c.obj
+.PHONY : ll_drivers/system_stm32f1xx.c.obj
+
+ll_drivers/system_stm32f1xx.i: ll_drivers/system_stm32f1xx.c.i
+.PHONY : ll_drivers/system_stm32f1xx.i
+
+# target to preprocess a source file
+ll_drivers/system_stm32f1xx.c.i:
+	cd /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build && $(MAKE) $(MAKESILENT) -f /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/build.make /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/ll_drivers/system_stm32f1xx.c.i
+.PHONY : ll_drivers/system_stm32f1xx.c.i
+
+ll_drivers/system_stm32f1xx.s: ll_drivers/system_stm32f1xx.c.s
+.PHONY : ll_drivers/system_stm32f1xx.s
+
+# target to generate assembly for a file
+ll_drivers/system_stm32f1xx.c.s:
+	cd /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build && $(MAKE) $(MAKESILENT) -f /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/build.make /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/ll_drivers/system_stm32f1xx.c.s
+.PHONY : ll_drivers/system_stm32f1xx.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -544,6 +568,9 @@ help:
 	@echo "... ll_drivers/stm32f1xx_ll_utils.obj"
 	@echo "... ll_drivers/stm32f1xx_ll_utils.i"
 	@echo "... ll_drivers/stm32f1xx_ll_utils.s"
+	@echo "... ll_drivers/system_stm32f1xx.obj"
+	@echo "... ll_drivers/system_stm32f1xx.i"
+	@echo "... ll_drivers/system_stm32f1xx.s"
 .PHONY : help
 
 

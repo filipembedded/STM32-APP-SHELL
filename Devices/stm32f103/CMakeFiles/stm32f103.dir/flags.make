@@ -6,5 +6,5 @@ C_DEFINES =
 
 C_INCLUDES = -I/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/ProjectConfig -isystem /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/core -isystem /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/ll_drivers -isystem /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/HAL
 
-C_FLAGS = -g -mcpu=cortex-m3 -mthumb -fdata-sections -ffunction-sections -fno-common -fno-tree-loop-if-convert -fno-merge-constants -fshort-enums -fno-math-errno -g3 -gdwarf-2 -MMD -MP -MF "\$$(@:%.0=%.d)" -Wall -Wextra -Wstack-usage=128 -Wshadow -Wdouble-promotion -Wno-unused-parameter -Wno-unused-function -Wno-enum-conversion -Og -std=c11
+C_FLAGS = -g -mcpu=cortex-m3 -mthumb -fdata-sections -ffunction-sections -fno-common -fno-tree-loop-if-convert -fno-merge-constants -fshort-enums -fno-math-errno -g3 -gdwarf-2 -MMD -MP -MF "\$$(@:%.0=%.d)" -Wall -Wextra -Wstack-usage=128 -Wshadow -Wdouble-promotion -Wno-unused-parameter -Wno-unused-function -Wno-enum-conversion -Wno-main -Og -std=c11
 

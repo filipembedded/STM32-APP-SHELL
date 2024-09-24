@@ -103,7 +103,7 @@ CMakeFiles/image.elf.dir/all: /home/filip/Documents/code/STM32/TEMPLATES/STM32_A
 
 # Build rule for subdir invocation for target.
 CMakeFiles/image.elf.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles 19
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles 20
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/image.elf.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles 0
 .PHONY : CMakeFiles/image.elf.dir/rule
@@ -124,12 +124,12 @@ CMakeFiles/image.elf.dir/clean:
 /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/all:
 	$(MAKE) $(MAKESILENT) -f /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/build.make /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/depend
 	$(MAKE) $(MAKESILENT) -f /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/build.make /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles --progress-num=4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 "Built target stm32f103"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles --progress-num=4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 "Built target stm32f103"
 .PHONY : /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/all
 
 # Build rule for subdir invocation for target.
 /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles 16
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles 17
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles 0
 .PHONY : /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir/rule

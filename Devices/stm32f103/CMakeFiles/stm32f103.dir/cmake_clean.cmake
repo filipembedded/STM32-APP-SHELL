@@ -29,6 +29,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/stm32f103.dir/ll_drivers/stm32f1xx_ll_usb.c.obj.d"
   "CMakeFiles/stm32f103.dir/ll_drivers/stm32f1xx_ll_utils.c.obj"
   "CMakeFiles/stm32f103.dir/ll_drivers/stm32f1xx_ll_utils.c.obj.d"
+  "CMakeFiles/stm32f103.dir/ll_drivers/system_stm32f1xx.c.obj"
+  "CMakeFiles/stm32f103.dir/ll_drivers/system_stm32f1xx.c.obj.d"
   "libstm32f103.a"
   "libstm32f103.pdb"
 )

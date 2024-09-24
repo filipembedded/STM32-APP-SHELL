@@ -27,12 +27,12 @@ Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" p
 The CXX compiler identification is GNU, found in "/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/3.25.1/CompilerIdCXX/CMakeCXXCompilerId.o"
 
 Detecting C compiler ABI info compiled with the following output:
-Change Dir: /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-vUU7x8
+Change Dir: /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-2Bmw1h
 
-Run Build Command(s):make -f Makefile cmTC_fb6a3/fast && make  -f CMakeFiles/cmTC_fb6a3.dir/build.make CMakeFiles/cmTC_fb6a3.dir/build
-make[1]: Entering directory '/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-vUU7x8'
-Building C object CMakeFiles/cmTC_fb6a3.dir/CMakeCCompilerABI.c.obj
-/usr/bin/arm-none-eabi-gcc   -v -o CMakeFiles/cmTC_fb6a3.dir/CMakeCCompilerABI.c.obj -c /usr/share/cmake-3.25/Modules/CMakeCCompilerABI.c
+Run Build Command(s):make -f Makefile cmTC_7b088/fast && make  -f CMakeFiles/cmTC_7b088.dir/build.make CMakeFiles/cmTC_7b088.dir/build
+make[1]: Entering directory '/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-2Bmw1h'
+Building C object CMakeFiles/cmTC_7b088.dir/CMakeCCompilerABI.c.obj
+/usr/bin/arm-none-eabi-gcc   -v -o CMakeFiles/cmTC_7b088.dir/CMakeCCompilerABI.c.obj -c /usr/share/cmake-3.25/Modules/CMakeCCompilerABI.c
 Using built-in specs.
 COLLECT_GCC=/usr/bin/arm-none-eabi-gcc
 Target: arm-none-eabi
@@ -40,8 +40,8 @@ Configured with: ../configure --build=x86_64-linux-gnu --prefix=/usr --includedi
 Thread model: single
 Supported LTO compression algorithms: zlib
 gcc version 10.3.1 20210621 (release) (15:10.3-2021.07-4) 
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_fb6a3.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
- /usr/lib/gcc/arm-none-eabi/10.3.1/cc1 -quiet -v -D__USES_INITFINI__ /usr/share/cmake-3.25/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -auxbase-strip CMakeFiles/cmTC_fb6a3.dir/CMakeCCompilerABI.c.obj -version -o /tmp/ccMjDz1O.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_7b088.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
+ /usr/lib/gcc/arm-none-eabi/10.3.1/cc1 -quiet -v -D__USES_INITFINI__ /usr/share/cmake-3.25/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -auxbase-strip CMakeFiles/cmTC_7b088.dir/CMakeCCompilerABI.c.obj -version -o /tmp/ccqHbu67.s
 GNU C17 (15:10.3-2021.07-4) version 10.3.1 20210621 (release) (arm-none-eabi)
 	compiled by GNU C version 11.2.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.24-GMP
 
@@ -58,18 +58,18 @@ GNU C17 (15:10.3-2021.07-4) version 10.3.1 20210621 (release) (arm-none-eabi)
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 Compiler executable checksum: 4cf7574ae54eb0935abb4a8c56f8bcfe
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_fb6a3.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
- /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_fb6a3.dir/CMakeCCompilerABI.c.obj /tmp/ccMjDz1O.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_7b088.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
+ /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_7b088.dir/CMakeCCompilerABI.c.obj /tmp/ccqHbu67.s
 GNU assembler version 2.38 (arm-none-eabi) using BFD version (2.38-3ubuntu1+15build1) 2.38
 COMPILER_PATH=/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/
 LIBRARY_PATH=/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_fb6a3.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
-Linking C static library libcmTC_fb6a3.a
-/usr/bin/cmake -P CMakeFiles/cmTC_fb6a3.dir/cmake_clean_target.cmake
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fb6a3.dir/link.txt --verbose=1
-/usr/bin/arm-none-eabi-ar qc libcmTC_fb6a3.a CMakeFiles/cmTC_fb6a3.dir/CMakeCCompilerABI.c.obj
-/usr/bin/arm-none-eabi-ranlib libcmTC_fb6a3.a
-make[1]: Leaving directory '/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-vUU7x8'
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_7b088.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
+Linking C static library libcmTC_7b088.a
+/usr/bin/cmake -P CMakeFiles/cmTC_7b088.dir/cmake_clean_target.cmake
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7b088.dir/link.txt --verbose=1
+/usr/bin/arm-none-eabi-ar qc libcmTC_7b088.a CMakeFiles/cmTC_7b088.dir/CMakeCCompilerABI.c.obj
+/usr/bin/arm-none-eabi-ranlib libcmTC_7b088.a
+make[1]: Leaving directory '/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-2Bmw1h'
 
 
 
@@ -88,12 +88,12 @@ Parsed C implicit include dir info from above output: rv=done
 
 Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(arm-none-eabi-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-vUU7x8]
+  ignore line: [Change Dir: /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-2Bmw1h]
   ignore line: []
-  ignore line: [Run Build Command(s):make -f Makefile cmTC_fb6a3/fast && make  -f CMakeFiles/cmTC_fb6a3.dir/build.make CMakeFiles/cmTC_fb6a3.dir/build]
-  ignore line: [make[1]: Entering directory '/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-vUU7x8']
-  ignore line: [Building C object CMakeFiles/cmTC_fb6a3.dir/CMakeCCompilerABI.c.obj]
-  ignore line: [/usr/bin/arm-none-eabi-gcc   -v -o CMakeFiles/cmTC_fb6a3.dir/CMakeCCompilerABI.c.obj -c /usr/share/cmake-3.25/Modules/CMakeCCompilerABI.c]
+  ignore line: [Run Build Command(s):make -f Makefile cmTC_7b088/fast && make  -f CMakeFiles/cmTC_7b088.dir/build.make CMakeFiles/cmTC_7b088.dir/build]
+  ignore line: [make[1]: Entering directory '/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-2Bmw1h']
+  ignore line: [Building C object CMakeFiles/cmTC_7b088.dir/CMakeCCompilerABI.c.obj]
+  ignore line: [/usr/bin/arm-none-eabi-gcc   -v -o CMakeFiles/cmTC_7b088.dir/CMakeCCompilerABI.c.obj -c /usr/share/cmake-3.25/Modules/CMakeCCompilerABI.c]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/arm-none-eabi-gcc]
   ignore line: [Target: arm-none-eabi]
@@ -101,8 +101,8 @@ Parsed C implicit link information from above output:
   ignore line: [Thread model: single]
   ignore line: [Supported LTO compression algorithms: zlib]
   ignore line: [gcc version 10.3.1 20210621 (release) (15:10.3-2021.07-4) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_fb6a3.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
-  ignore line: [ /usr/lib/gcc/arm-none-eabi/10.3.1/cc1 -quiet -v -D__USES_INITFINI__ /usr/share/cmake-3.25/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -auxbase-strip CMakeFiles/cmTC_fb6a3.dir/CMakeCCompilerABI.c.obj -version -o /tmp/ccMjDz1O.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_7b088.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
+  ignore line: [ /usr/lib/gcc/arm-none-eabi/10.3.1/cc1 -quiet -v -D__USES_INITFINI__ /usr/share/cmake-3.25/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -auxbase-strip CMakeFiles/cmTC_7b088.dir/CMakeCCompilerABI.c.obj -version -o /tmp/ccqHbu67.s]
   ignore line: [GNU C17 (15:10.3-2021.07-4) version 10.3.1 20210621 (release) (arm-none-eabi)]
   ignore line: [	compiled by GNU C version 11.2.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.24-GMP]
   ignore line: []
@@ -119,18 +119,18 @@ Parsed C implicit link information from above output:
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
   ignore line: [Compiler executable checksum: 4cf7574ae54eb0935abb4a8c56f8bcfe]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_fb6a3.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
-  ignore line: [ /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_fb6a3.dir/CMakeCCompilerABI.c.obj /tmp/ccMjDz1O.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_7b088.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
+  ignore line: [ /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_7b088.dir/CMakeCCompilerABI.c.obj /tmp/ccqHbu67.s]
   ignore line: [GNU assembler version 2.38 (arm-none-eabi) using BFD version (2.38-3ubuntu1+15build1) 2.38]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_fb6a3.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
-  ignore line: [Linking C static library libcmTC_fb6a3.a]
-  ignore line: [/usr/bin/cmake -P CMakeFiles/cmTC_fb6a3.dir/cmake_clean_target.cmake]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fb6a3.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/arm-none-eabi-ar qc libcmTC_fb6a3.a CMakeFiles/cmTC_fb6a3.dir/CMakeCCompilerABI.c.obj]
-  ignore line: [/usr/bin/arm-none-eabi-ranlib libcmTC_fb6a3.a]
-  ignore line: [make[1]: Leaving directory '/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-vUU7x8']
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_7b088.dir/CMakeCCompilerABI.c.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
+  ignore line: [Linking C static library libcmTC_7b088.a]
+  ignore line: [/usr/bin/cmake -P CMakeFiles/cmTC_7b088.dir/cmake_clean_target.cmake]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7b088.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/arm-none-eabi-ar qc libcmTC_7b088.a CMakeFiles/cmTC_7b088.dir/CMakeCCompilerABI.c.obj]
+  ignore line: [/usr/bin/arm-none-eabi-ranlib libcmTC_7b088.a]
+  ignore line: [make[1]: Leaving directory '/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-2Bmw1h']
   ignore line: []
   ignore line: []
   implicit libs: []
@@ -140,12 +140,12 @@ Parsed C implicit link information from above output:
 
 
 Detecting CXX compiler ABI info compiled with the following output:
-Change Dir: /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-YKBlUa
+Change Dir: /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-Y00Efj
 
-Run Build Command(s):make -f Makefile cmTC_bcb52/fast && make  -f CMakeFiles/cmTC_bcb52.dir/build.make CMakeFiles/cmTC_bcb52.dir/build
-make[1]: Entering directory '/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-YKBlUa'
-Building CXX object CMakeFiles/cmTC_bcb52.dir/CMakeCXXCompilerABI.cpp.obj
-/usr/bin/arm-none-eabi-g++   -v -o CMakeFiles/cmTC_bcb52.dir/CMakeCXXCompilerABI.cpp.obj -c /usr/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp
+Run Build Command(s):make -f Makefile cmTC_536ab/fast && make  -f CMakeFiles/cmTC_536ab.dir/build.make CMakeFiles/cmTC_536ab.dir/build
+make[1]: Entering directory '/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-Y00Efj'
+Building CXX object CMakeFiles/cmTC_536ab.dir/CMakeCXXCompilerABI.cpp.obj
+/usr/bin/arm-none-eabi-g++   -v -o CMakeFiles/cmTC_536ab.dir/CMakeCXXCompilerABI.cpp.obj -c /usr/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp
 Using built-in specs.
 COLLECT_GCC=/usr/bin/arm-none-eabi-g++
 Target: arm-none-eabi
@@ -153,8 +153,8 @@ Configured with: ../configure --build=x86_64-linux-gnu --prefix=/usr --includedi
 Thread model: single
 Supported LTO compression algorithms: zlib
 gcc version 10.3.1 20210621 (release) (15:10.3-2021.07-4) 
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_bcb52.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
- /usr/lib/gcc/arm-none-eabi/10.3.1/cc1plus -quiet -v -D__USES_INITFINI__ /usr/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -auxbase-strip CMakeFiles/cmTC_bcb52.dir/CMakeCXXCompilerABI.cpp.obj -version -o /tmp/ccbkO6dF.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_536ab.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
+ /usr/lib/gcc/arm-none-eabi/10.3.1/cc1plus -quiet -v -D__USES_INITFINI__ /usr/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -auxbase-strip CMakeFiles/cmTC_536ab.dir/CMakeCXXCompilerABI.cpp.obj -version -o /tmp/ccvOUbB8.s
 GNU C++14 (15:10.3-2021.07-4) version 10.3.1 20210621 (release) (arm-none-eabi)
 	compiled by GNU C version 11.2.0, GMP version 6.2.1, MPFR version 4.1.0, MPC version 1.2.1, isl version isl-0.24-GMP
 
@@ -174,18 +174,18 @@ GNU C++14 (15:10.3-2021.07-4) version 10.3.1 20210621 (release) (arm-none-eabi)
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 Compiler executable checksum: 4f994585a8ca8864fa1f4d2fb208a0ba
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_bcb52.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
- /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_bcb52.dir/CMakeCXXCompilerABI.cpp.obj /tmp/ccbkO6dF.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_536ab.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
+ /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_536ab.dir/CMakeCXXCompilerABI.cpp.obj /tmp/ccvOUbB8.s
 GNU assembler version 2.38 (arm-none-eabi) using BFD version (2.38-3ubuntu1+15build1) 2.38
 COMPILER_PATH=/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/
 LIBRARY_PATH=/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_bcb52.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
-Linking CXX static library libcmTC_bcb52.a
-/usr/bin/cmake -P CMakeFiles/cmTC_bcb52.dir/cmake_clean_target.cmake
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bcb52.dir/link.txt --verbose=1
-/usr/bin/arm-none-eabi-ar qc libcmTC_bcb52.a CMakeFiles/cmTC_bcb52.dir/CMakeCXXCompilerABI.cpp.obj
-/usr/bin/arm-none-eabi-ranlib libcmTC_bcb52.a
-make[1]: Leaving directory '/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-YKBlUa'
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_536ab.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t'
+Linking CXX static library libcmTC_536ab.a
+/usr/bin/cmake -P CMakeFiles/cmTC_536ab.dir/cmake_clean_target.cmake
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_536ab.dir/link.txt --verbose=1
+/usr/bin/arm-none-eabi-ar qc libcmTC_536ab.a CMakeFiles/cmTC_536ab.dir/CMakeCXXCompilerABI.cpp.obj
+/usr/bin/arm-none-eabi-ranlib libcmTC_536ab.a
+make[1]: Leaving directory '/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-Y00Efj'
 
 
 
@@ -210,12 +210,12 @@ Parsed CXX implicit include dir info from above output: rv=done
 
 Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(arm-none-eabi-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-YKBlUa]
+  ignore line: [Change Dir: /home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-Y00Efj]
   ignore line: []
-  ignore line: [Run Build Command(s):make -f Makefile cmTC_bcb52/fast && make  -f CMakeFiles/cmTC_bcb52.dir/build.make CMakeFiles/cmTC_bcb52.dir/build]
-  ignore line: [make[1]: Entering directory '/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-YKBlUa']
-  ignore line: [Building CXX object CMakeFiles/cmTC_bcb52.dir/CMakeCXXCompilerABI.cpp.obj]
-  ignore line: [/usr/bin/arm-none-eabi-g++   -v -o CMakeFiles/cmTC_bcb52.dir/CMakeCXXCompilerABI.cpp.obj -c /usr/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Run Build Command(s):make -f Makefile cmTC_536ab/fast && make  -f CMakeFiles/cmTC_536ab.dir/build.make CMakeFiles/cmTC_536ab.dir/build]
+  ignore line: [make[1]: Entering directory '/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-Y00Efj']
+  ignore line: [Building CXX object CMakeFiles/cmTC_536ab.dir/CMakeCXXCompilerABI.cpp.obj]
+  ignore line: [/usr/bin/arm-none-eabi-g++   -v -o CMakeFiles/cmTC_536ab.dir/CMakeCXXCompilerABI.cpp.obj -c /usr/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/arm-none-eabi-g++]
   ignore line: [Target: arm-none-eabi]
@@ -223,8 +223,8 @@ Parsed CXX implicit link information from above output:
   ignore line: [Thread model: single]
   ignore line: [Supported LTO compression algorithms: zlib]
   ignore line: [gcc version 10.3.1 20210621 (release) (15:10.3-2021.07-4) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_bcb52.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
-  ignore line: [ /usr/lib/gcc/arm-none-eabi/10.3.1/cc1plus -quiet -v -D__USES_INITFINI__ /usr/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -auxbase-strip CMakeFiles/cmTC_bcb52.dir/CMakeCXXCompilerABI.cpp.obj -version -o /tmp/ccbkO6dF.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_536ab.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
+  ignore line: [ /usr/lib/gcc/arm-none-eabi/10.3.1/cc1plus -quiet -v -D__USES_INITFINI__ /usr/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mcpu=arm7tdmi -mfloat-abi=soft -marm -mlibarch=armv4t -march=armv4t -auxbase-strip CMakeFiles/cmTC_536ab.dir/CMakeCXXCompilerABI.cpp.obj -version -o /tmp/ccvOUbB8.s]
   ignore line: [GNU C++14 (15:10.3-2021.07-4) version 10.3.1 20210621 (release) (arm-none-eabi)]
   ignore line: [	compiled by GNU C version 11.2.0  GMP version 6.2.1  MPFR version 4.1.0  MPC version 1.2.1  isl version isl-0.24-GMP]
   ignore line: []
@@ -244,18 +244,18 @@ Parsed CXX implicit link information from above output:
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
   ignore line: [Compiler executable checksum: 4f994585a8ca8864fa1f4d2fb208a0ba]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_bcb52.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
-  ignore line: [ /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_bcb52.dir/CMakeCXXCompilerABI.cpp.obj /tmp/ccbkO6dF.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_536ab.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
+  ignore line: [ /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/as -v -march=armv4t -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_536ab.dir/CMakeCXXCompilerABI.cpp.obj /tmp/ccvOUbB8.s]
   ignore line: [GNU assembler version 2.38 (arm-none-eabi) using BFD version (2.38-3ubuntu1+15build1) 2.38]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/bin/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/arm-none-eabi/10.3.1/:/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_bcb52.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
-  ignore line: [Linking CXX static library libcmTC_bcb52.a]
-  ignore line: [/usr/bin/cmake -P CMakeFiles/cmTC_bcb52.dir/cmake_clean_target.cmake]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bcb52.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/arm-none-eabi-ar qc libcmTC_bcb52.a CMakeFiles/cmTC_bcb52.dir/CMakeCXXCompilerABI.cpp.obj]
-  ignore line: [/usr/bin/arm-none-eabi-ranlib libcmTC_bcb52.a]
-  ignore line: [make[1]: Leaving directory '/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-YKBlUa']
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_536ab.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mcpu=arm7tdmi' '-mfloat-abi=soft' '-marm' '-mlibarch=armv4t' '-march=armv4t']
+  ignore line: [Linking CXX static library libcmTC_536ab.a]
+  ignore line: [/usr/bin/cmake -P CMakeFiles/cmTC_536ab.dir/cmake_clean_target.cmake]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_536ab.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/arm-none-eabi-ar qc libcmTC_536ab.a CMakeFiles/cmTC_536ab.dir/CMakeCXXCompilerABI.cpp.obj]
+  ignore line: [/usr/bin/arm-none-eabi-ranlib libcmTC_536ab.a]
+  ignore line: [make[1]: Leaving directory '/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/CMakeScratch/TryCompile-Y00Efj']
   ignore line: []
   ignore line: []
   implicit libs: []
