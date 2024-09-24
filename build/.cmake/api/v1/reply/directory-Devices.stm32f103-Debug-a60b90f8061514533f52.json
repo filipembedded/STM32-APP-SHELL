@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103",
+		"source" : "Devices/stm32f103"
+	}
+}

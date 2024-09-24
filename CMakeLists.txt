@@ -34,7 +34,7 @@ endif()
 ################################################################################
 
 ##  Device
-
+add_subdirectory(Devices/${DEVICE} ${LSM_BINARY_DIR}/Devices/${DEVICE})
 ##  Libs
 
 ##  Drivers
@@ -55,7 +55,7 @@ endif()
 #   Set app sources
 ################################################################################
 set(PROJECT_SOURCES
-    Devices/${DEVICE}/startup.S
+    Devices/${DEVICE}/startup.c
     ${MAIN_REL_PATH}/main.c
 )
 
