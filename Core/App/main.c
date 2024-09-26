@@ -13,8 +13,8 @@ void main(void)
     SystemCoreClockUpdate();
 
 
-    
+    while(1)
+    {
 
-
-    
+    }
 }
