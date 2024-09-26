@@ -2,15 +2,17 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <system_stm32f1xx.h>
+#include "rcc.h"
+
 
 
 void main(void)
 {
     /************************* Initialize System ******************************/
+    // NOTE: This should be moved into Startup.c
     // Initialize clocks, PLL's,..
-    SystemInit();
-    // Update SystemCoreClock variable (always when changing clock source)
-    SystemCoreClockUpdate();
+    HL_SystemInit();
+    HL_ClockConfig();
 
 
     while(1)

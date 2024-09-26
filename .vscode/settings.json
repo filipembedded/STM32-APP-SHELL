@@ -1,5 +1,6 @@
 {
+    "cortex-debug.armToolchainPath": "/usr/bin",
     "files.associations": {
-        "system_stm32f1xx.h": "c"
+        "stm32f1xx.h": "c"
     }
 }
