@@ -1,6 +1,0 @@
-/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/image.elf.dir
-/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/edit_cache.dir
-/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/build/CMakeFiles/rebuild_cache.dir
-/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/stm32f103.dir
-/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/edit_cache.dir
-/home/filip/Documents/code/STM32/TEMPLATES/STM32_APP_SHELL/Devices/stm32f103/CMakeFiles/rebuild_cache.dir

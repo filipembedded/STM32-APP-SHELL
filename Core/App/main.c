@@ -7,7 +7,13 @@
 void main(void)
 {
     /************************* Initialize System ******************************/
+    // Initialize clocks, PLL's,..
     SystemInit();
+    // Update SystemCoreClock variable (always when changing clock source)
+    SystemCoreClockUpdate();
+
+
+    
 
 
     
