@@ -4,11 +4,13 @@ project(stm32f103 VERSION 1.0.0)
 
 file(GLOB LL_DRIVER_SOURCES ll_drivers/*.c)
 file(GLOB HAL_SOURCES HAL/*c)
+file(GLOB CORE_SOURCES core/*.c)
 
 
 set(SOURCES
     ${LL_DRIVER_SOURCES}
     ${HAL_SOURCES}
+    ${CORE_SOURCES}
 )
 
 add_library(${PROJECT_NAME} STATIC ${SOURCES})
