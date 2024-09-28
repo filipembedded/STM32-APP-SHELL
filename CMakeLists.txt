@@ -39,6 +39,8 @@ lsm_add_common_flags()
 #     # Add more checks for other defines if needed
 # endif()
 
+# Automatically adds every define as a add_compile_definition variable from 
+# devconf.h user-configurable file
 if(EXISTS ${CMAKE_SOURCE_DIR}/ProjectConfig/devconf.h)
     # Read the content of devconf.h
     file(READ ${CMAKE_SOURCE_DIR}/ProjectConfig/devconf.h DEVCONF_CONTENT)
