@@ -29,16 +29,6 @@ lsm_add_common_flags()
 #     add_compile_definitions(DEVCONF)
 # endif()
 
-# if(EXISTS ${CMAKE_SOURCE_DIR}/ProjectConfig/devconf.h)
-#     file(READ ${CMAKE_SOURCE_DIR}/ProjectConfig/devconf.h DEVCONF_CONTENT)
-# 
-#     if(DEVCONF_CONTENT MATCHES "#define USE_FULL_LL_DRIVER")
-#         add_compile_definitions(USE_FULL_LL_DRIVER)
-#     endif()
-#     
-#     # Add more checks for other defines if needed
-# endif()
-
 # Automatically adds every define as a add_compile_definition variable from 
 # devconf.h user-configurable file
 if(EXISTS ${CMAKE_SOURCE_DIR}/ProjectConfig/devconf.h)
