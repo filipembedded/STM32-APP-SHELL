@@ -15,6 +15,7 @@
 #ifdef DEVICE_STM32F103
 
 #define HSE_VALUE 72000000
+#define USE_FULL_LL_DRIVER
 
 
 

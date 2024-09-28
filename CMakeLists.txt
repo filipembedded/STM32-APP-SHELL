@@ -25,9 +25,39 @@ lsm_add_common_flags()
 ################################################################################
 #   Device config
 ################################################################################
+# if(EXISTS ${CMAKE_SOURCE_DIR}/ProjectConfig/devconf.h)
+#     add_compile_definitions(DEVCONF)
+# endif()
+
+# if(EXISTS ${CMAKE_SOURCE_DIR}/ProjectConfig/devconf.h)
+#     file(READ ${CMAKE_SOURCE_DIR}/ProjectConfig/devconf.h DEVCONF_CONTENT)
+# 
+#     if(DEVCONF_CONTENT MATCHES "#define USE_FULL_LL_DRIVER")
+#         add_compile_definitions(USE_FULL_LL_DRIVER)
+#     endif()
+#     
+#     # Add more checks for other defines if needed
+# endif()
+
 if(EXISTS ${CMAKE_SOURCE_DIR}/ProjectConfig/devconf.h)
-    add_compile_definitions(DEVCONF)
+    # Read the content of devconf.h
+    file(READ ${CMAKE_SOURCE_DIR}/ProjectConfig/devconf.h DEVCONF_CONTENT)
+
+    # Use regex to find all #define statements and extract the macro names
+    string(REGEX MATCHALL "#define ([A-Za-z_][A-Za-z0-9_]*)" DEFINE_MATCHES "${DEVCONF_CONTENT}")
+
+    # Iterate over all matches and extract just the macro names
+    foreach(DEFINE IN LISTS DEFINE_MATCHES)
+        string(REGEX REPLACE "#define ([A-Za-z_][A-Za-z0-9_]*)" "\\1" DEFINE_NAME "${DEFINE}")
+        list(APPEND COMPILE_DEFINITIONS_LIST ${DEFINE_NAME})
+    endforeach()
+
+    # Add all found defines as global compile definitions
+    if(COMPILE_DEFINITIONS_LIST)
+        add_compile_definitions(${COMPILE_DEFINITIONS_LIST})
+    endif()
 endif()
+
 
 ################################################################################
 #   Add subdirectories
