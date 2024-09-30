@@ -6,6 +6,15 @@
  */
 #include "rcc.h"
 #include "stm32f1xx.h"
+#include "stm32f1xx_ll_gpio.h"
+#include "stm32f1xx_ll_rcc.h"
+#include "stm32f1xx_ll_bus.h"
+#include "stm32f1xx_ll_system.h"
+#include "stm32f1xx_ll_exti.h"
+#include "stm32f1xx_ll_cortex.h"
+#include "stm32f1xx_ll_utils.h"
+#include "stm32f1xx_ll_pwr.h"
+#include "stm32f1xx_ll_dma.h"
 
 void HL_SystemInit()
 {
@@ -19,82 +28,59 @@ void HL_SystemInit()
 
 }
 
-void HL_ClockConfig()
+void HL_ClockConfigHSE(void)
 {
     /************************* HSE Clock Configuration ************************/
-    // Counter variable
-    volatile uint32_t counter = 0;
     // Clear the HSEBYP bit - not using the clock module, but just Crystal
-    RCC->CR &= ~RCC_CR_HSEBYP;
+    LL_RCC_HSE_DisableBypass();
+    
     // Set the HSEON bit to enable External Clock
-    RCC->CR |= RCC_CR_HSEON;
-    // Check if External clock is ready
-    do{
+    LL_RCC_HSE_Enable();
+    
+    // Wait for HSE to be ready
+    uint32_t counter = 0;
+    while (LL_RCC_HSE_IsReady() != 1 && counter < RCC_HSE_CHECK_VALUE)
+    {
         counter++;
     }
-    while ((RCC->CR & RCC_CR_HSERDY) == 0 && (counter < RCC_HSE_CHECK_VALUE));
 
-    if((RCC->CR & RCC_CR_HSERDY)!=0) 
+    if (LL_RCC_HSE_IsReady() == 1)
     {
         /*************************** FLASH Setup ******************************/
         // If HSE is ready, prepare FLASH
-        FLASH->ACR |= FLASH_ACR_PRFTBE;
-        // For 72MHz clock freq - two wait state latency is needed
-        // Clear all FLASH_ACR_LATENCY bits
-        FLASH->ACR &= ~FLASH_ACR_LATENCY;
-        // Set two wait states latency
-        FLASH->ACR |= FLASH_ACR_LATENCY_1;
+        LL_FLASH_SetLatency(LL_FLASH_LATENCY_2);
+        LL_FLASH_EnablePrefetch();
 
         /************************** AHB Prescaler Setup ***********************/
-        // Clear CFGR reg HPRE bits - No Clock division for APB2 bus (72MHz)
-        RCC->CFGR &= ~RCC_CFGR_HPRE;
+        // No Clock division for AHB bus (HCLK)
+        LL_RCC_SetAHBPrescaler(LL_RCC_SYSCLK_DIV_1);
 
         /************************** APB1 Bus Clock Setup **********************/
-        // Clear CFGR reg PPRE1 bits - Clock division is 2 for APB1 bus (max 36MHz)
-        RCC->CFGR &= ~RCC_CFGR_PPRE1;
-        // Set bit for division 2
-        RCC->CFGR |= RCC_CFGR_PPRE1_DIV2;
+        // Clock division is 2 for APB1 bus (max 36MHz)
+        LL_RCC_SetAPB1Prescaler(LL_RCC_APB1_DIV_2);
 
         /************************** APB2 Bus Clock Setup **********************/
-        // Clear CFGR reg PPRE2 bits
-        RCC->CFGR &= ~RCC_CFGR_PPRE2;
-        // Set bit for division 1
-        RCC->CFGR |= RCC_CFGR_PPRE2_DIV1;
-
-        /************************** ADC Prescaler Setup ***********************/
-        // Clear ADCPRE bits
-        RCC->CFGR &= ~RCC_CFGR_ADCPRE;
-        // Set division 6 - APB2/6 = 72MHz/6 = 12MHz
-        RCC->CFGR |= RCC_CFGR_ADCPRE_DIV6;
-
-        /************************** USB Prescaler Setup ***********************/
-        // Clear USBPRE bits
-        RCC->CFGR &= ~RCC_CFGR_USBPRE;
-        // Clear bit for no division
-        RCC->CFGR &= ~RCC_CFGR_PLLXTPRE;
-        // Set PLLX prescaler to 1
-        RCC->CFGR |= RCC_CFGR_PLLSRC;
-
-        /********************* PLLmul Setup - Main Clock **********************/
-        // Clear PLLMULL bits
-        RCC->CFGR &= ~RCC_CFGR_PLLMULL;
-        // Set PLLMULL for 9x multiplication to achieve 72MHz clock 
-        RCC->CFGR |= RCC_CFGR_PLLMULL9;
+        // No Clock division for APB2 bus (max 72MHz)
+        LL_RCC_SetAPB2Prescaler(LL_RCC_APB2_DIV_1);
+        
+        /********************* PLL Configuration - Main Clock **********************/
+        // Configure PLL: PLL source is HSE, multiplier is 9 (8MHz * 9 = 72MHz)
+        LL_RCC_PLL_ConfigDomain_SYS(LL_RCC_PLLSOURCE_HSE_DIV_1, LL_RCC_PLL_MUL_9);
 
         /***************************** Enable PLL *****************************/
-        // Set PLL to on
-        RCC->CR |= RCC_CR_PLLON;
+        // Enable PLL
+        LL_RCC_PLL_Enable();
         // Wait until it is ready
-        while ((RCC->CR & RCC_CR_PLLRDY) == 0);
+        while (LL_RCC_PLL_IsReady() != 1);
 
         /******************** Set PLL as a Main Clock Source ******************/
-        // Clear Clock Switch register
-        RCC->CFGR &= ~RCC_CFGR_SW;
-        // Set PLL as a main source 
-        RCC->CFGR |= RCC_CFGR_SW_PLL;
+        // Set PLL as a main source
+        LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_PLL);
         // Wait until PLL is used as a system clock
-        while ((RCC->CFGR &RCC_CFGR_SWS) != 0x08);
+        while (LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_PLL);
 
-        
+        // Configure SysTick to generate interrupts every 1ms
+        LL_Init1msTick(72000000); // Use the correct HCLK value for your configuration
+        LL_SYSTICK_EnableIT(); // Enable SysTick interrupt
     }
 }

@@ -11,7 +11,7 @@
 #define RCC_HSE_CHECK_VALUE 500
 
 void HL_SystemInit();
-void HL_ClockConfig();
+void HL_ClockConfigHSE();
 
 
 
