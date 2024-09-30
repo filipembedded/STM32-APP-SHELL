@@ -6,6 +6,8 @@
 #include "gpio.h"
 #include "util.h"
 
+#include "stm32f1xx_ll_gpio.h"
+
 
 
 
@@ -18,5 +20,5 @@ hl_status_t HL_GPIO_Init(gpio_hl_cfg_t *cfg)
 
 
     /* Initialization of Peripheral clock */
-
+    return HL_SUCCESS;
 }

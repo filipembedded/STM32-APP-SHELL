@@ -4,7 +4,14 @@
  * @author filipembedded
  */
 
+
+#ifndef GPIO_H
+#define GPIO_H
+
+#include "util.h"
 #include "stm32f1xx_ll_gpio.h"
+
+
 
 
 /************************** Typedefs ******************************************/
@@ -57,3 +64,12 @@ typedef struct {
     gpio_hl_outtype_t  outputType;
     gpio_hl_pull_t     pull;
 } gpio_hl_cfg_t;
+
+
+/***************************** Declarations ***********************************/
+hl_status_t HL_GPIO_Init(gpio_hl_cfg_t *cfg);
+
+
+
+
+#endif
