@@ -16,21 +16,10 @@
 
 uint32_t device_time_ms = 0;
 
-#define RCC_HSE_CHECK_VALUE 0x100000
-
-void LL_ClockConfig(void);
 
 
 void main(void)
 {
-    /************************* Initialize System ******************************/
-    // NOTE: This should be moved into Startup.c
-    // Enable Debug
-    //HL_SWD_Init();
-
-    // initialize Clocks with LL drivers 
-    //HL_ClockConfigHSE();
-
     /************************* APB Buses Initialization  **********************/
     LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOC);
     LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
