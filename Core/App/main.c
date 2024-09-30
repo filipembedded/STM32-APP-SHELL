@@ -4,6 +4,7 @@
 #include <system_stm32f1xx.h>
 #include "rcc.h"
 #include "swd.h"
+#include "gpio.h"
 #include "stm32f1xx_ll_gpio.h"
 #include "stm32f1xx_ll_rcc.h"
 #include "stm32f1xx_ll_bus.h"
@@ -16,13 +17,11 @@
 
 uint32_t device_time_ms = 0;
 
-
-
 void main(void)
 {
     /************************* APB Buses Initialization  **********************/
     LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOC);
-    LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
+    //LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
     /************************* Peripherals Initialization *********************/
     //GPIO
 
@@ -41,7 +40,7 @@ void main(void)
     while(1)
     {
         LL_GPIO_TogglePin(GPIOC, LL_GPIO_PIN_13);
-        LL_mDelay(1000);
+        LL_mDelay(100);
         //for (uint32_t i = 0; i < 7200000; i++);
     }
 }

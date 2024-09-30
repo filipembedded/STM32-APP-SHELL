@@ -13,9 +13,6 @@
 #define RESERVED              0
 
 
-#define RCC_HSE_CHECK_VALUE 0x100000
-
-
 void Reset_Handler(void);
 void Default_Handler(void);
 void NMI_Handler(void) __attribute__((weak, alias("Default_Handler")));
