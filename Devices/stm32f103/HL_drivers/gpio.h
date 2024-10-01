@@ -10,8 +10,11 @@
 
 #include "util.h"
 #include "stm32f1xx_ll_gpio.h"
+#include "stm32f103xb.h"
 
 
+/***************************** Defines ****************************************/
+#define GPIO_MAX_NUM_INSTANCES 5
 
 
 /************************** Typedefs ******************************************/
@@ -57,18 +60,29 @@ typedef enum {
     GPIO_HL_PULL_UP   = LL_GPIO_PULL_UP,
 } gpio_hl_pull_t;
 
+typedef enum {
+    GPIO_HL_INSTANCE_PORT_A = 0,
+    GPIO_HL_INSTANCE_PORT_B,
+    GPIO_HL_INSTANCE_PORT_C,
+    GPIO_HL_INSTANCE_PORT_D,
+    GPIO_HL_INSTANCE_PORT_E,
+} gpio_hl_instance_t;
 typedef struct {
-    gpio_hl_pin_t      pin;
+    // gpio_hl_pin_t      pin;
     gpio_hl_mode_t     mode;
     gpio_hl_speed_t    speed;
     gpio_hl_outtype_t  outputType;
     gpio_hl_pull_t     pull;
+    // gpio_hl_port_t     port;
 } gpio_hl_cfg_t;
 
 
 /***************************** Declarations ***********************************/
-hl_status_t HL_GPIO_Init(gpio_hl_cfg_t *cfg);
+hl_status_t HL_GPIO_Init(gpio_hl_instance_t instance,
+                         gpio_hl_pin_t pin,
+                         gpio_hl_cfg_t *cfg);
 
+void HL_GPIO_TogglePin();
 
 
 

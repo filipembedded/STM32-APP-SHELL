@@ -48,7 +48,7 @@ hl_status_t HL_APB2_EnableClock(bus_hl_apb2_peripheral_t peripheral)
         return HL_ERROR;
 }
 
-hl_status_t HL_APB2_DisableClock(bus_hl_apb1_peripheral_t peripheral)
+hl_status_t HL_APB2_DisableClock(bus_hl_apb2_peripheral_t peripheral)
 {
     /* TODO: Add asserts */
     LL_APB2_GRP1_DisableClock(peripheral);

@@ -28,7 +28,7 @@ typedef enum {
     BUS_HL_APB1_PERIPH_I2C2    = LL_APB1_GRP1_PERIPH_I2C2,
     BUS_HL_APB1_PERIPH_CAN1    = LL_APB1_GRP1_PERIPH_CAN1,
     BUS_HL_APB1_PERIPH_USB     = LL_APB1_GRP1_PERIPH_USB, 
-    BUS_HL_APB1_PERIPH_WWDG    = LL_APB1_GRP1_PERIPH_WWDG
+    BUS_HL_APB1_PERIPH_WWDG    = LL_APB1_GRP1_PERIPH_WWDG,
 } bus_hl_apb1_peripheral_t;
 
 typedef enum {
@@ -41,7 +41,7 @@ typedef enum {
     BUS_HL_APB2_PERIPH_SPI1   = LL_APB2_GRP1_PERIPH_SPI1,
     BUS_HL_APB2_PERIPH_USART1 = LL_APB2_GRP1_PERIPH_USART1,
     BUS_HL_APB1_PERIPH_ADC1   = LL_APB2_GRP1_PERIPH_ADC1,
-    BUS_HL_APB1_PERIPH_ADC2   = LL_APB2_GRP1_PERIPH_ADC2
+    BUS_HL_APB1_PERIPH_ADC2   = LL_APB2_GRP1_PERIPH_ADC2,
 } bus_hl_apb2_peripheral_t;
 
 
@@ -54,7 +54,7 @@ hl_state_t HL_APB1_IsEnabledClock(bus_hl_apb1_peripheral_t peripheral);
 
 hl_status_t HL_APB2_EnableClock(bus_hl_apb2_peripheral_t peripheral);
 
-hl_status_t HL_APB2_DisableClock(bus_hl_apb1_peripheral_t peripheral);
+hl_status_t HL_APB2_DisableClock(bus_hl_apb2_peripheral_t peripheral);
 
 hl_state_t HL_APB2_IsEnabledClock(bus_hl_apb2_peripheral_t peripheral);
 
