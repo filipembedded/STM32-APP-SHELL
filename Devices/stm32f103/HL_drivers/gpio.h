@@ -61,6 +61,11 @@ typedef enum {
 } gpio_hl_pull_t;
 
 typedef enum {
+    GPIO_HL_RESET = 0,
+    GPIO_HL_SET      ,
+} gpio_hl_pinvalue_t;
+
+typedef enum {
     GPIO_HL_INSTANCE_PORT_A = 0,
     GPIO_HL_INSTANCE_PORT_B,
     GPIO_HL_INSTANCE_PORT_C,
@@ -81,10 +86,17 @@ typedef struct {
 hl_status_t HL_GPIO_Init(gpio_hl_instance_t instance,
                          gpio_hl_pin_t pin,
                          gpio_hl_cfg_t *cfg);
-hl_status_t HL_GPIO_Init_experimental(gpio_hl_instance_t instance,
-                                      gpio_hl_pin_t pin,
-                                      gpio_hl_cfg_t *cfg);
-void HL_GPIO_TogglePin();
+
+void HL_GPIO_TogglePin(gpio_hl_instance_t instance, gpio_hl_pin_t pin);
+void HL_GPIO_SetPinValue(gpio_hl_instance_t instance, 
+                      gpio_hl_pin_t pin, 
+                      gpio_hl_pinvalue_t value);
+
+
+
+
+
+
 
 
 

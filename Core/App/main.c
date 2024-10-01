@@ -21,38 +21,30 @@ uint32_t device_time_ms = 0;
 
 void main(void)
 {
-    /************************* APB Buses Initialization  **********************/
-    //LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOC);
-    //LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
     /************************* Peripherals Initialization *********************/
     //GPIO
-    /*
-    LL_GPIO_InitTypeDef cfg;
-    cfg.Pin  = LL_GPIO_PIN_13;
-    cfg.Mode = LL_GPIO_MODE_OUTPUT;
-    cfg.OutputType = LL_GPIO_OUTPUT_OPENDRAIN;
-    cfg.Pull       = LL_GPIO_PULL_UP;
-    cfg.Speed      = LL_GPIO_SPEED_FREQ_HIGH;
-
-    if (LL_GPIO_Init(GPIOC, &cfg) == ERROR)
-    {
-        for(;;);
-    } 
-    */
     gpio_hl_cfg_t cfg;
     cfg.mode       = GPIO_HL_MODE_OUTPUT;
     cfg.outputType = GPIO_HL_OUTTYPE_OPENDRAIN;
     cfg.pull       = GPIO_HL_PULL_UP;
     cfg.speed      = GPIO_HL_SPEED_50MHz;
 
-    HL_GPIO_Init_experimental(GPIO_HL_INSTANCE_PORT_C, GPIO_HL_PIN_13, &cfg);
+    if (HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_C, 
+                                  GPIO_HL_PIN_13, &cfg) != HL_SUCCESS)
+    {
+        for (;;);
+    }
 
     
     while(1)
     {
-        LL_GPIO_TogglePin(GPIOC, LL_GPIO_PIN_13);
-        LL_mDelay(100);
-        //for (uint32_t i = 0; i < 7200000; i++);
+        //HL_GPIO_TogglePin(GPIO_HL_INSTANCE_PORT_C, GPIO_HL_PIN_13);
+        HL_GPIO_SetPinValue(GPIO_HL_INSTANCE_PORT_C, 
+                            GPIO_HL_PIN_13, GPIO_HL_SET);
+        LL_mDelay(1000);
+        HL_GPIO_SetPinValue(GPIO_HL_INSTANCE_PORT_C,
+                            GPIO_HL_PIN_13, GPIO_HL_RESET);
+        LL_mDelay(1000);
     }
 }
 
