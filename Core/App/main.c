@@ -29,22 +29,22 @@ void main(void)
     cfg.pull       = GPIO_HL_PULL_UP;
     cfg.speed      = GPIO_HL_SPEED_50MHz;
 
-    if (HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_C, 
-                                  GPIO_HL_PIN_13, &cfg) != HL_SUCCESS)
-    {
-        for (;;);
-    }
+    HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_C, GPIO_HL_PIN_13, &cfg);
 
+    cfg.mode = GPIO_HL_MODE_INPUT;
+    cfg.pull = GPIO_HL_PULL_UP;
+
+    HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_B, GPIO_HL_PIN_12, &cfg);
+ 
     
     while(1)
     {
-        //HL_GPIO_TogglePin(GPIO_HL_INSTANCE_PORT_C, GPIO_HL_PIN_13);
-        HL_GPIO_SetPinValue(GPIO_HL_INSTANCE_PORT_C, 
-                            GPIO_HL_PIN_13, GPIO_HL_SET);
-        LL_mDelay(1000);
-        HL_GPIO_SetPinValue(GPIO_HL_INSTANCE_PORT_C,
-                            GPIO_HL_PIN_13, GPIO_HL_RESET);
-        LL_mDelay(1000);
+        if (HL_GPIO_GetPinValue(GPIO_HL_INSTANCE_PORT_B, GPIO_HL_PIN_12) == HL_SET)
+        {
+            HL_GPIO_SetPinValue(GPIO_HL_INSTANCE_PORT_C, GPIO_HL_PIN_13, HL_SET);
+        } else {
+            HL_GPIO_SetPinValue(GPIO_HL_INSTANCE_PORT_C, GPIO_HL_PIN_13, HL_RESET);
+        }
     }
 }
 

@@ -91,8 +91,7 @@ void HL_GPIO_TogglePin(gpio_hl_instance_t instance, gpio_hl_pin_t pin);
 void HL_GPIO_SetPinValue(gpio_hl_instance_t instance, 
                       gpio_hl_pin_t pin, 
                       gpio_hl_pinvalue_t value);
-
-
+hl_state_t HL_GPIO_GetPinValue(gpio_hl_instance_t instance, gpio_hl_pin_t pin);
 
 
 

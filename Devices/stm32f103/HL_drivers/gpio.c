@@ -69,6 +69,16 @@ void HL_GPIO_SetPinValue(gpio_hl_instance_t instance,
         LL_GPIO_ResetOutputPin(stmPort, pin);
 }
 
+hl_state_t HL_GPIO_GetPinValue(gpio_hl_instance_t instance, gpio_hl_pin_t pin)
+{
+    GPIO_TypeDef *stmPort = prvHL_GPIO_GetSTMPort(instance);
+
+    if (LL_GPIO_IsInputPinSet(stmPort, pin) == 1)
+        return HL_SET;
+    else 
+        return HL_RESET;
+}
+
 
 
 
