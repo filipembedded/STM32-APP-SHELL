@@ -81,7 +81,9 @@ typedef struct {
 hl_status_t HL_GPIO_Init(gpio_hl_instance_t instance,
                          gpio_hl_pin_t pin,
                          gpio_hl_cfg_t *cfg);
-
+hl_status_t HL_GPIO_Init_experimental(gpio_hl_instance_t instance,
+                                      gpio_hl_pin_t pin,
+                                      gpio_hl_cfg_t *cfg);
 void HL_GPIO_TogglePin();
 
 

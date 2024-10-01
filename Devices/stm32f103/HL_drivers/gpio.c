@@ -109,6 +109,7 @@ static bus_hl_apb2_peripheral_t prvHL_GPIO_GetBUS(gpio_hl_instance_t instance)
             return BUS_HL_APB2_PERIPH_GPIOE;
         
     }
+    return 0;
 }
 
 static GPIO_TypeDef* prvHL_GPIO_GetSTMPort(gpio_hl_instance_t instance)
@@ -126,6 +127,7 @@ static GPIO_TypeDef* prvHL_GPIO_GetSTMPort(gpio_hl_instance_t instance)
         case GPIO_HL_INSTANCE_PORT_E:
             return GPIOE;
     }
+    return 0;
 }
 
 

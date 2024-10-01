@@ -15,16 +15,18 @@
 #include "stm32f1xx_ll_pwr.h"
 #include "stm32f1xx_ll_dma.h"
 
+#include "gpio.h"
+
 uint32_t device_time_ms = 0;
 
 void main(void)
 {
     /************************* APB Buses Initialization  **********************/
-    LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOC);
+    //LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOC);
     //LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
     /************************* Peripherals Initialization *********************/
     //GPIO
-
+    /*
     LL_GPIO_InitTypeDef cfg;
     cfg.Pin  = LL_GPIO_PIN_13;
     cfg.Mode = LL_GPIO_MODE_OUTPUT;
@@ -36,6 +38,15 @@ void main(void)
     {
         for(;;);
     } 
+    */
+    gpio_hl_cfg_t cfg;
+    cfg.mode       = GPIO_HL_MODE_OUTPUT;
+    cfg.outputType = GPIO_HL_OUTTYPE_OPENDRAIN;
+    cfg.pull       = GPIO_HL_PULL_UP;
+    cfg.speed      = GPIO_HL_SPEED_50MHz;
+
+    HL_GPIO_Init_experimental(GPIO_HL_INSTANCE_PORT_C, GPIO_HL_PIN_13, &cfg);
+
     
     while(1)
     {
