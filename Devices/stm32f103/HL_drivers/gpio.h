@@ -10,6 +10,7 @@
 
 #include "util.h"
 #include "stm32f1xx_ll_gpio.h"
+#include "stm32f1xx_ll_exti.h"
 #include "stm32f103xb.h"
 
 
@@ -33,6 +34,8 @@ typedef enum {
     GPIO_HL_PIN_11 = LL_GPIO_PIN_11,
     GPIO_HL_PIN_12 = LL_GPIO_PIN_12,
     GPIO_HL_PIN_13 = LL_GPIO_PIN_13,
+    GPIO_HL_PIN_14 = LL_GPIO_PIN_14,
+    GPIO_HL_PIN_15 = LL_GPIO_PIN_15,
     GPIO_HL_PIN_ALL = LL_GPIO_PIN_ALL,
 } gpio_hl_pin_t;
 
@@ -72,6 +75,13 @@ typedef enum {
     GPIO_HL_INSTANCE_PORT_D,
     GPIO_HL_INSTANCE_PORT_E,
 } gpio_hl_instance_t;
+
+typedef enum {
+    GPIO_HL_EDGESTATE_NONE           = LL_EXTI_TRIGGER_NONE,
+    GPIO_HL_EDGESTATE_RISING         = LL_EXTI_TRIGGER_RISING,
+    GPIO_HL_EDGESTATE_FALLING        = LL_EXTI_TRIGGER_FALLING,
+    GPIO_HL_EDGESTATE_RISING_FALLING = LL_EXTI_TRIGGER_RISING_FALLING,
+} gpio_hl_edgestate_t;
 typedef struct {
     // gpio_hl_pin_t      pin;
     gpio_hl_mode_t     mode;
@@ -80,6 +90,10 @@ typedef struct {
     gpio_hl_pull_t     pull;
     // gpio_hl_port_t     port;
 } gpio_hl_cfg_t;
+
+
+/*************************** User Callbacks ***********************************/
+typedef void (*gpio_hl_callback_t)(void);
 
 
 /***************************** Declarations ***********************************/
@@ -93,6 +107,13 @@ void HL_GPIO_SetPinValue(gpio_hl_instance_t instance,
                       gpio_hl_pinvalue_t value);
 hl_state_t HL_GPIO_GetPinValue(gpio_hl_instance_t instance, gpio_hl_pin_t pin);
 
+hl_status_t HL_GPIO_EnableInterrupt(gpio_hl_instance_t instance,
+                             gpio_hl_pin_t pin,
+                             gpio_hl_edgestate_t edgeState);
+
+hl_status_t HL_GPIO_ConfigureCallback(gpio_hl_instance_t instance, 
+                                      gpio_hl_pin_t      pin,
+                                      gpio_hl_callback_t callback);
 
 
 

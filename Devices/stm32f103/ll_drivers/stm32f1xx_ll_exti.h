@@ -330,7 +330,7 @@ __STATIC_INLINE void LL_EXTI_DisableIT_0_31(uint32_t ExtiLine)
   *         @arg @ref LL_EXTI_LINE_16
   *         @arg @ref LL_EXTI_LINE_17
   *         @arg @ref LL_EXTI_LINE_18
-  *         @arg @ref LL_EXTI_LINE_19
+  *         @arg @ref LL_EXTI_LINgpioE_19
   *         @arg @ref LL_EXTI_LINE_ALL_0_31
   * @note   Please check each device line mapping for EXTI Line availability
   * @retval State of bit (1 or 0).
