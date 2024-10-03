@@ -84,29 +84,76 @@ uint32_t prvHL_GPIO_GetEXTI_LINE_FromPinTest(gpio_hl_pin_t pin)
     }
 }
 
+void GPIO_Config(void)
+{
+    // Enable clock for GPIOB
+    LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOB);
+
+    // Configure PB12 as input
+    LL_GPIO_SetPinMode(GPIOB, LL_GPIO_PIN_12, LL_GPIO_MODE_INPUT);
+    LL_GPIO_SetPinPull(GPIOB, LL_GPIO_PIN_12, LL_GPIO_PULL_UP);  // Configure pull-up resistor
+}
+
+void EXTI_Config(void)
+{
+    // Enable clock for AFIO
+    LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_AFIO);
+
+    // Map EXTI line to GPIOB
+    LL_GPIO_AF_SetEXTISource(LL_GPIO_AF_EXTI_PORTB, LL_GPIO_AF_EXTI_LINE12);
+
+    // Enable EXTI line 12
+    LL_EXTI_EnableIT_0_31(LL_EXTI_LINE_12);
+    LL_EXTI_EnableRisingTrig_0_31(LL_EXTI_LINE_12);  // Trigger on rising edge
+
+    // Enable NVIC for EXTI15_10
+    NVIC_SetPriority(EXTI15_10_IRQn, 0);  // Set the priority to 0 (highest)
+    NVIC_EnableIRQ(EXTI15_10_IRQn);       // Enable the IRQ in NVIC
+}
+
+void EXTI_Config2(void)
+{
+    // Enable clock for AFIO
+    LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_AFIO);
+
+    // Map EXTI line to GPIOB
+    LL_GPIO_AF_SetEXTISource(LL_GPIO_AF_EXTI_PORTB, LL_GPIO_AF_EXTI_LINE12);
+
+    // Enable EXTI line 12
+    LL_EXTI_EnableIT_0_31(LL_EXTI_LINE_12);
+    LL_EXTI_EnableRisingTrig_0_31(LL_EXTI_LINE_12);  // Trigger on rising edge
+
+    // Enable NVIC for EXTI15_10
+    //NVIC_SetPriority(EXTI15_10_IRQn, 0);  // Set the priority to 0 (highest)
+    //NVIC_EnableIRQ(EXTI15_10_IRQn);       // Enable the IRQ in NVIC
+
+    // Configure User Callback
+    HL_GPIO_ConfigureCallback(GPIO_HL_INSTANCE_PORT_B, GPIO_HL_PIN_12, gpio_cb_12);
+}
 
 void main(void)
 {
     /************************* Peripherals Initialization *********************/
     //GPIO
-    gpio_hl_cfg_t cfg;
-    cfg.mode       = GPIO_HL_MODE_OUTPUT;
-    cfg.outputType = GPIO_HL_OUTTYPE_OPENDRAIN;
-    cfg.pull       = GPIO_HL_PULL_UP;
-    cfg.speed      = GPIO_HL_SPEED_50MHz;
+     gpio_hl_cfg_t cfg;
+     cfg.mode       = GPIO_HL_MODE_OUTPUT;
+     cfg.outputType = GPIO_HL_OUTTYPE_OPENDRAIN;
+     cfg.pull       = GPIO_HL_PULL_UP;
+     cfg.speed      = GPIO_HL_SPEED_50MHz;
 
-    HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_C, GPIO_HL_PIN_13, &cfg);
-    HL_GPIO_SetPinValue(GPIO_HL_INSTANCE_PORT_C, GPIO_HL_PIN_13, GPIO_HL_SET);
+     HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_C, GPIO_HL_PIN_13, &cfg);
+     HL_GPIO_SetPinValue(GPIO_HL_INSTANCE_PORT_C, GPIO_HL_PIN_13, GPIO_HL_SET);
+// 
+    // cfg.outputType = GPIO_HL_OUTTYPE_PUSHPULL;
+    // cfg.mode = GPIO_HL_MODE_INPUT;
+    // cfg.pull = GPIO_HL_PULL_UP;
+// 
+    // HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_B, GPIO_HL_PIN_12, &cfg);
+    // HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_A, GPIO_HL_PIN_0, &cfg);
+    // HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_A, GPIO_HL_PIN_6, &cfg);
+    // HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_B, GPIO_HL_PIN_1, &cfg);
 
-    cfg.mode = GPIO_HL_MODE_INPUT;
-    cfg.pull = GPIO_HL_PULL_UP;
-
-    HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_B, GPIO_HL_PIN_12, &cfg);
-    HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_A, GPIO_HL_PIN_0, &cfg);
-    HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_A, GPIO_HL_PIN_6, &cfg);
-    HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_B, GPIO_HL_PIN_1, &cfg);
-
-
+/*
     HL_GPIO_EnableInterrupt(GPIO_HL_INSTANCE_PORT_B, GPIO_HL_PIN_12, 
                                                     GPIO_HL_EDGESTATE_FALLING);
     HL_GPIO_ConfigureCallback(GPIO_HL_INSTANCE_PORT_B, GPIO_HL_PIN_12, gpio_cb_12);
@@ -123,29 +170,42 @@ void main(void)
                                                     GPIO_HL_EDGESTATE_FALLING);
     HL_GPIO_ConfigureCallback(GPIO_HL_INSTANCE_PORT_B, GPIO_HL_PIN_1, gpio_cb_6);
 
+*/
 
     /*************************** DEBUG SECTION ********************************/
-  //  if (HL_APB2_EnableClock(BUS_HL_APB2_PERIPH_AFIO) != HL_SUCCESS)
-  //  {
-  //      for (;;);
-  //  }
+    //if (HL_APB2_EnableClock(BUS_HL_APB2_PERIPH_AFIO) != HL_SUCCESS)
+    //{
+    //    for (;;);
+    //}
+
+    //uint32_t exti_port = prvHL_GPIO_GetEXTI_PORT_FromInstanceTest(GPIO_HL_INSTANCE_PORT_B);
+    //uint32_t exti_line = prvHL_GPIO_GetEXTI_LINE_FromPinTest(GPIO_HL_PIN_12);
 //
-  //  uint32_t exti_port = prvHL_GPIO_GetEXTI_PORT_FromInstanceTest(GPIO_HL_INSTANCE_PORT_B);
-  //  uint32_t exti_line = prvHL_GPIO_GetEXTI_LINE_FromPinTest(GPIO_HL_PIN_12);
+    ///* Remap GPIO pins to EXTI pins using AFIO */
+    ////LL_GPIO_AF_SetEXTISource(exti_port, exti_line); 
+    //LL_GPIO_AF_SetEXTISource(LL_GPIO_AF_EXTI_PORTB, LL_GPIO_AF_EXTI_LINE12);
 //
-  //  /* Remap GPIO pins to EXTI pins using AFIO */
-  //  LL_GPIO_AF_SetEXTISource(exti_port, exti_line); 
+    //LL_EXTI_InitTypeDef exti_init;
+    //exti_init.Line_0_31   = exti_line;
+    //exti_init.LineCommand = ENABLE;
+    //exti_init.Mode        = LL_EXTI_MODE_IT;
+    //exti_init.Trigger     = GPIO_HL_EDGESTATE_FALLING;
 //
-  //  LL_EXTI_InitTypeDef exti_init;
-  //  exti_init.Line_0_31   = exti_line;
-  //  exti_init.LineCommand = ENABLE;
-  //  exti_init.Mode        = LL_EXTI_MODE_IT;
-  //  exti_init.Trigger     = GPIO_HL_EDGESTATE_FALLING;
-//
-  //  if (LL_EXTI_Init(&exti_init) != SUCCESS)
-  //  {
-  //      for (;;);
-  //  }
+    //LL_EXTI_EnableIT_0_31(LL_EXTI_LINE_12);  // Enable interrupt for line 12
+    //LL_EXTI_EnableFallingTrig_0_31(LL_EXTI_LINE_12);
+    //
+    //NVIC_SetPriority(EXTI15_10_IRQn, 0);  // Set interrupt priority
+    //NVIC_EnableIRQ(EXTI15_10_IRQn);  // Enable the interrupt
+
+   // if (LL_EXTI_Init(&exti_init) != SUCCESS)
+   // {
+   //     for (;;);
+   // }
+
+
+   GPIO_Config();
+
+   EXTI_Config2();
 
 
 
