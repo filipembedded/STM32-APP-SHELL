@@ -32,8 +32,12 @@ void *prvGPIO_LINE15_CALLBACK;
 
 static bus_hl_apb2_peripheral_t prvHL_GPIO_GetBUS(gpio_hl_instance_t instance);
 static GPIO_TypeDef* prvHL_GPIO_GetSTMPort(gpio_hl_instance_t instance);
+
 static uint32_t prvHL_GPIO_GetEXTI_LINE_FromPin(gpio_hl_pin_t pin);
 static uint32_t prvHL_GPIO_GetEXTI_PORT_FromInstance(gpio_hl_instance_t instance);
+
+static uint32_t prvHL_GPIO_GetAF_EXTI_LINE_FromPin(gpio_hl_pin_t pin);
+static uint32_t prvHL_GPIO_GetAF_EXTI_PORT_FromInstance(gpio_hl_instance_t instance);
 static IRQn_Type prvHL_GPIO_GetIRQnFromPin(gpio_hl_pin_t pin);
 
 
@@ -113,12 +117,14 @@ hl_status_t HL_GPIO_EnableInterrupt(gpio_hl_instance_t instance,
     so you need to enable its clock. */
     HL_APB2_EnableClock(BUS_HL_APB2_PERIPH_AFIO);
 
-    uint32_t exti_port = prvHL_GPIO_GetEXTI_PORT_FromInstance(instance);
-    uint32_t exti_line = prvHL_GPIO_GetEXTI_LINE_FromPin(pin);
+    
+    uint32_t exti_af_port = prvHL_GPIO_GetAF_EXTI_PORT_FromInstance(instance);
+    uint32_t exti_af_line = prvHL_GPIO_GetAF_EXTI_LINE_FromPin(instance);
 
     /* Remap GPIO pins to EXTI pins using AFIO */
-    LL_GPIO_AF_SetEXTISource(exti_port, exti_line);
+    LL_GPIO_AF_SetEXTISource(exti_af_port, exti_af_line);
 
+    /*
     LL_EXTI_InitTypeDef exti_init;
     exti_init.Line_0_31   = exti_line;
     exti_init.LineCommand = ENABLE;
@@ -129,6 +135,18 @@ hl_status_t HL_GPIO_EnableInterrupt(gpio_hl_instance_t instance,
         return HL_SUCCESS;
     else 
         return HL_ERROR;
+    */
+
+    uint32_t exti_line = prvHL_GPIO_GetEXTI_LINE_FromPin(pin);
+    
+    LL_EXTI_EnableIT_0_31(exti_line);
+    if (edgeState == GPIO_HL_EDGESTATE_FALLING)
+    {
+        LL_EXTI_EnableFallingTrig_0_31(exti_line);
+    } else {
+        LL_EXTI_EnableRisingTrig_0_31(LL_EXTI_LINE_12);
+    }
+    
 }
 
 hl_status_t HL_GPIO_ConfigureCallback(gpio_hl_instance_t instance, 
@@ -236,6 +254,48 @@ static GPIO_TypeDef* prvHL_GPIO_GetSTMPort(gpio_hl_instance_t instance)
 
 static uint32_t prvHL_GPIO_GetEXTI_LINE_FromPin(gpio_hl_pin_t pin)
 {
+    switch(pin){
+        case GPIO_HL_PIN_0:
+            return LL_EXTI_LINE_0;
+        case GPIO_HL_PIN_1:
+            return LL_EXTI_LINE_1;
+        case GPIO_HL_PIN_2:
+            return LL_EXTI_LINE_2;
+        case GPIO_HL_PIN_3:
+            return LL_EXTI_LINE_3;
+        case GPIO_HL_PIN_4:
+            return LL_EXTI_LINE_4;
+        case GPIO_HL_PIN_5:
+            return LL_EXTI_LINE_5;
+        case GPIO_HL_PIN_6:
+            return LL_EXTI_LINE_6;
+        case GPIO_HL_PIN_7:
+            return LL_EXTI_LINE_7;
+        case GPIO_HL_PIN_8:
+            return LL_EXTI_LINE_8;
+        case GPIO_HL_PIN_9:
+            return LL_EXTI_LINE_9;
+        case GPIO_HL_PIN_10:
+            return LL_EXTI_LINE_10;
+        case GPIO_HL_PIN_11:
+            return LL_EXTI_LINE_11;
+        case GPIO_HL_PIN_12:
+            return LL_EXTI_LINE_12;
+        case GPIO_HL_PIN_13:
+            return LL_EXTI_LINE_13;
+        case GPIO_HL_PIN_14:
+            return LL_EXTI_LINE_14;
+        case GPIO_HL_PIN_15:
+            return LL_EXTI_LINE_15;
+    }
+}
+static uint32_t prvHL_GPIO_GetEXTI_PORT_FromInstance(gpio_hl_instance_t instance)
+{
+
+}
+
+static uint32_t prvHL_GPIO_GetAF_EXTI_LINE_FromPin(gpio_hl_pin_t pin)
+{
     switch (pin)
     {
         case GPIO_HL_PIN_0:
@@ -274,7 +334,7 @@ static uint32_t prvHL_GPIO_GetEXTI_LINE_FromPin(gpio_hl_pin_t pin)
     }
 }
 
-static uint32_t prvHL_GPIO_GetEXTI_PORT_FromInstance(gpio_hl_instance_t instance)
+static uint32_t prvHL_GPIO_GetAF_EXTI_PORT_FromInstance(gpio_hl_instance_t instance)
 {
     switch (instance)
     {
