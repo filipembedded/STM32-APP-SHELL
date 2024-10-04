@@ -125,7 +125,7 @@ hl_status_t HL_GPIO_EnableInterrupt(gpio_hl_instance_t instance,
     LL_GPIO_AF_SetEXTISource(exti_af_port, exti_af_line);
 
     uint32_t exti_line = prvHL_GPIO_GetEXTI_LINE_FromPin(pin);
-    /*
+    
     LL_EXTI_InitTypeDef exti_init;
     exti_init.Line_0_31   = exti_line;
     exti_init.LineCommand = ENABLE;
@@ -136,9 +136,9 @@ hl_status_t HL_GPIO_EnableInterrupt(gpio_hl_instance_t instance,
         return HL_SUCCESS;
     else 
         return HL_ERROR;
-    */
-
     
+
+    /*
     LL_EXTI_EnableIT_0_31(exti_line);
     if (edgeState == GPIO_HL_EDGESTATE_FALLING)
     {
@@ -146,7 +146,7 @@ hl_status_t HL_GPIO_EnableInterrupt(gpio_hl_instance_t instance,
     } else {
         LL_EXTI_EnableRisingTrig_0_31(exti_line);
     }
-    
+    */
 }
 
 hl_status_t HL_GPIO_ConfigureCallback(gpio_hl_instance_t instance, 
@@ -203,6 +203,9 @@ hl_status_t HL_GPIO_ConfigureCallback(gpio_hl_instance_t instance,
         case GPIO_HL_PIN_15:
             prvGPIO_LINE15_CALLBACK = callback;
             break;
+        default:
+            return HL_ERROR;
+        
     }
 
     /* TODO: Clear all interrupt before enabling NVIC! */
@@ -211,6 +214,8 @@ hl_status_t HL_GPIO_ConfigureCallback(gpio_hl_instance_t instance,
     EXTInum = prvHL_GPIO_GetIRQnFromPin(pin);
     NVIC_SetPriority(EXTInum, NVIC_PRIORITY_EXTI_GPIO);
     NVIC_EnableIRQ(EXTInum);
+
+    return HL_SUCCESS;
 }
 
 
@@ -287,6 +292,8 @@ static uint32_t prvHL_GPIO_GetEXTI_LINE_FromPin(gpio_hl_pin_t pin)
             return LL_EXTI_LINE_14;
         case GPIO_HL_PIN_15:
             return LL_EXTI_LINE_15;
+        default:
+            return HL_ERROR;
     }
 }
 static uint32_t prvHL_GPIO_GetEXTI_PORT_FromInstance(gpio_hl_instance_t instance)
@@ -330,6 +337,8 @@ static uint32_t prvHL_GPIO_GetAF_EXTI_LINE_FromPin(gpio_hl_pin_t pin)
             return LL_GPIO_AF_EXTI_LINE14;
         case GPIO_HL_PIN_15:
             return LL_GPIO_AF_EXTI_LINE15;
+        default:
+            return HL_ERROR;
 
     }
 }
@@ -348,6 +357,8 @@ static uint32_t prvHL_GPIO_GetAF_EXTI_PORT_FromInstance(gpio_hl_instance_t insta
             return LL_GPIO_AF_EXTI_PORTD;
         case GPIO_HL_INSTANCE_PORT_E:
             return LL_GPIO_AF_EXTI_PORTE;
+        default:
+            return HL_ERROR;
     }
 }
 
