@@ -45,4 +45,15 @@ SECTIONS
 		. = ALIGN(4);
 		_ebss = .;
 	} > SRAM
+
+	/* Define heap and stack section */
+    ._user_heap_stack :
+    {
+        . = ALIGN(8);
+        PROVIDE ( end = . );
+        PROVIDE ( _end = . );
+        . = . + 0x200;  /* Min heap size (0x200 = 512 bytes) */
+        . = . + 0x400;  /* Min stack size (0x400 = 1024 bytes) */
+        . = ALIGN(8);
+    } > SRAM
 }

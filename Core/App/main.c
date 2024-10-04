@@ -27,9 +27,6 @@ void gpio_cb_12(void);
 void gpio_cb_15(void);
 
 
-
-
-
 void GPIO_Config(void)
 {
     // Enable clock for GPIOB
@@ -39,9 +36,6 @@ void GPIO_Config(void)
     LL_GPIO_SetPinMode(GPIOB, LL_GPIO_PIN_12, LL_GPIO_MODE_INPUT);
     LL_GPIO_SetPinPull(GPIOB, LL_GPIO_PIN_12, LL_GPIO_PULL_UP);  // Configure pull-up resistor
 }
-
-
-
 
 void EXTI_ConfigHL()
 {

@@ -32,10 +32,7 @@ void *prvGPIO_LINE15_CALLBACK;
 
 static bus_hl_apb2_peripheral_t prvHL_GPIO_GetBUS(gpio_hl_instance_t instance);
 static GPIO_TypeDef* prvHL_GPIO_GetSTMPort(gpio_hl_instance_t instance);
-
 static uint32_t prvHL_GPIO_GetEXTI_LINE_FromPin(gpio_hl_pin_t pin);
-static uint32_t prvHL_GPIO_GetEXTI_PORT_FromInstance(gpio_hl_instance_t instance);
-
 static uint32_t prvHL_GPIO_GetAF_EXTI_LINE_FromPin(gpio_hl_pin_t pin);
 static uint32_t prvHL_GPIO_GetAF_EXTI_PORT_FromInstance(gpio_hl_instance_t instance);
 static IRQn_Type prvHL_GPIO_GetIRQnFromPin(gpio_hl_pin_t pin);
@@ -47,8 +44,9 @@ hl_status_t HL_GPIO_Init(gpio_hl_instance_t instance,
                                       gpio_hl_pin_t pin,
                                       gpio_hl_cfg_t *cfg)
 {
-    /* Asserts */
-    //assert(instance < GPIO_MAX_NUM_INSTANCES);
+    assert_instance(instance);
+    assert_pin(pin);
+    assert(cfg != NULL);
 
     /* Typedefs */
     LL_GPIO_InitTypeDef stmCfg;
@@ -80,7 +78,6 @@ hl_status_t HL_GPIO_Init(gpio_hl_instance_t instance,
 
 void HL_GPIO_TogglePin(gpio_hl_instance_t instance, gpio_hl_pin_t pin)
 {
-    /* TODO: Add asserts */
     GPIO_TypeDef *stmPort = prvHL_GPIO_GetSTMPort(instance);
 
     LL_GPIO_TogglePin(stmPort, pin);
@@ -112,6 +109,13 @@ hl_status_t HL_GPIO_EnableInterrupt(gpio_hl_instance_t instance,
                              gpio_hl_pin_t pin,
                              gpio_hl_edgestate_t edgeState)
 {
+    assert_instance(instance);
+    assert_pin(pin);
+    assert((edgeState == GPIO_HL_EDGESTATE_FALLING) ||
+            (edgeState == GPIO_HL_EDGESTATE_NONE) ||
+            (edgeState == GPIO_HL_EDGESTATE_RISING) ||
+            (edgeState == GPIO_HL_EDGESTATE_RISING_FALLING));
+
     /*Enable the Clock for AFIO (Alternate Function I/O): 
     The EXTI line is connected to the GPIO through the AFIO peripheral, 
     so you need to enable its clock. */
@@ -153,6 +157,9 @@ hl_status_t HL_GPIO_ConfigureCallback(gpio_hl_instance_t instance,
                                       gpio_hl_pin_t      pin,
                                       gpio_hl_callback_t callback)
 {
+    assert_pin(pin);
+    assert(callback != NULL);
+
     switch(pin)
     {
         case GPIO_HL_PIN_0:
@@ -295,10 +302,6 @@ static uint32_t prvHL_GPIO_GetEXTI_LINE_FromPin(gpio_hl_pin_t pin)
         default:
             return HL_ERROR;
     }
-}
-static uint32_t prvHL_GPIO_GetEXTI_PORT_FromInstance(gpio_hl_instance_t instance)
-{
-
 }
 
 static uint32_t prvHL_GPIO_GetAF_EXTI_LINE_FromPin(gpio_hl_pin_t pin)
