@@ -119,11 +119,12 @@ hl_status_t HL_GPIO_EnableInterrupt(gpio_hl_instance_t instance,
 
     
     uint32_t exti_af_port = prvHL_GPIO_GetAF_EXTI_PORT_FromInstance(instance);
-    uint32_t exti_af_line = prvHL_GPIO_GetAF_EXTI_LINE_FromPin(instance);
+    uint32_t exti_af_line = prvHL_GPIO_GetAF_EXTI_LINE_FromPin(pin);
 
     /* Remap GPIO pins to EXTI pins using AFIO */
     LL_GPIO_AF_SetEXTISource(exti_af_port, exti_af_line);
 
+    uint32_t exti_line = prvHL_GPIO_GetEXTI_LINE_FromPin(pin);
     /*
     LL_EXTI_InitTypeDef exti_init;
     exti_init.Line_0_31   = exti_line;
@@ -137,14 +138,13 @@ hl_status_t HL_GPIO_EnableInterrupt(gpio_hl_instance_t instance,
         return HL_ERROR;
     */
 
-    uint32_t exti_line = prvHL_GPIO_GetEXTI_LINE_FromPin(pin);
     
     LL_EXTI_EnableIT_0_31(exti_line);
     if (edgeState == GPIO_HL_EDGESTATE_FALLING)
     {
         LL_EXTI_EnableFallingTrig_0_31(exti_line);
     } else {
-        LL_EXTI_EnableRisingTrig_0_31(LL_EXTI_LINE_12);
+        LL_EXTI_EnableRisingTrig_0_31(exti_line);
     }
     
 }
@@ -366,9 +366,7 @@ static IRQn_Type prvHL_GPIO_GetIRQnFromPin(gpio_hl_pin_t pin)
         case GPIO_HL_PIN_4:
             return EXTI4_IRQn;
         case GPIO_HL_PIN_5:
-            return EXTI9_5_IRQn;
         case GPIO_HL_PIN_6:
-            return EXTI9_5_IRQn;
         case GPIO_HL_PIN_7:
         case GPIO_HL_PIN_8:
         case GPIO_HL_PIN_9:

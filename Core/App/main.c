@@ -27,7 +27,7 @@ void gpio_cb_12(void);
 
 
 
-uint32_t prvHLGPIO_GetAF_EXTI_PORT_FromInstanceTest(gpio_hl_instance_t instance)
+uint32_t prvHL_GPIO_GetAF_EXTI_PORT_FromInstanceTest(gpio_hl_instance_t instance)
 {
     switch (instance)
     {
@@ -208,7 +208,7 @@ void EXTI_Config3HL(void)
     uint32_t exti_line = prvHL_GPIO_GetEXTI_LINE_FromPinTest(GPIO_HL_PIN_12);
 
     // Enable EXTI line 12
-    LL_EXTI_EnableIT_0_31(exti_line); /* TODO: Ovde je problem !!! */
+    LL_EXTI_EnableIT_0_31(exti_line); 
     //LL_EXTI_EnableRisingTrig_0_31(LL_EXTI_LINE_12);  // Trigger on rising edge
     LL_EXTI_EnableFallingTrig_0_31(exti_line);
 
@@ -221,10 +221,72 @@ void EXTI_Config3HL(void)
 }
 
 
+
+
+void enableFuckinInterrupt()
+{
+    // Enable clock for AFIO
+    HL_APB2_EnableClock(BUS_HL_APB2_PERIPH_AFIO);
+
+    uint32_t exti_af_port = prvHLGPIO_GetAF_EXTI_PORT_FromInstanceTest(GPIO_HL_INSTANCE_PORT_B);
+    uint32_t exti_af_line = prvHL_GPIO_GetAF_EXTI_LINE_FromPinTest(GPIO_HL_PIN_12);
+
+    /* Remap GPIO pins to EXTI pins using AFIO */
+    LL_GPIO_AF_SetEXTISource(exti_af_port, exti_af_line);
+
+    uint32_t exti_line = prvHL_GPIO_GetEXTI_LINE_FromPinTest(GPIO_HL_PIN_12);
+
+    // Enable EXTI line 12
+    LL_EXTI_EnableIT_0_31(exti_line); 
+    //LL_EXTI_EnableRisingTrig_0_31(LL_EXTI_LINE_12);  // Trigger on rising edge
+    LL_EXTI_EnableFallingTrig_0_31(exti_line);
+}
+
+hl_status_t HL_GPIO_EnableFuckingInterrupt(gpio_hl_instance_t instance,
+                             gpio_hl_pin_t pin,
+                             gpio_hl_edgestate_t edgeState)
+{
+    /*Enable the Clock for AFIO (Alternate Function I/O): 
+    The EXTI line is connected to the GPIO through the AFIO peripheral, 
+    so you need to enable its clock. */
+    HL_APB2_EnableClock(BUS_HL_APB2_PERIPH_AFIO);
+
+    
+    uint32_t exti_af_port = prvHL_GPIO_GetAF_EXTI_PORT_FromInstanceTest(instance);
+    uint32_t exti_af_line = prvHL_GPIO_GetAF_EXTI_LINE_FromPinTest(pin);
+
+    /* Remap GPIO pins to EXTI pins using AFIO */
+    LL_GPIO_AF_SetEXTISource(exti_af_port, exti_af_line);
+
+    uint32_t exti_line = prvHL_GPIO_GetEXTI_LINE_FromPinTest(pin);
+    /*
+    LL_EXTI_InitTypeDef exti_init;
+    exti_init.Line_0_31   = exti_line;
+    exti_init.LineCommand = ENABLE;
+    exti_init.Mode        = LL_EXTI_MODE_IT;
+    exti_init.Trigger     = edgeState;
+
+    if (LL_EXTI_Init(&exti_init) == SUCCESS)
+        return HL_SUCCESS;
+    else 
+        return HL_ERROR;
+    */
+
+    
+    LL_EXTI_EnableIT_0_31(exti_line);
+    if (edgeState == GPIO_HL_EDGESTATE_FALLING)
+    {
+        LL_EXTI_EnableFallingTrig_0_31(exti_line);
+    } else {
+        LL_EXTI_EnableRisingTrig_0_31(exti_line);
+    }
+    
+}
 void EXTI_ConfigHL()
 {
-    HL_GPIO_EnableInterrupt(GPIO_HL_INSTANCE_PORT_B, GPIO_HL_PIN_12, GPIO_HL_EDGESTATE_FALLING);
-
+    //HL_GPIO_EnableFuckingInterrupt(GPIO_HL_INSTANCE_PORT_B, GPIO_HL_PIN_12, GPIO_HL_EDGESTATE_FALLING);
+    //enableFuckinInterrupt();
+    HL_GPIO_EnableInterrupt(GPIO_HL_INSTANCE_PORT_B, GPIO_HL_PIN_12, GPIO_HL_EDGESTATE_FALLING);    
     HL_GPIO_ConfigureCallback(GPIO_HL_INSTANCE_PORT_B, GPIO_HL_PIN_12, gpio_cb_12);
 }
 
@@ -241,16 +303,16 @@ void main(void)
      HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_C, GPIO_HL_PIN_13, &cfg);
      HL_GPIO_SetPinValue(GPIO_HL_INSTANCE_PORT_C, GPIO_HL_PIN_13, GPIO_HL_SET);
 // 
-    // cfg.outputType = GPIO_HL_OUTTYPE_PUSHPULL;
-    // cfg.mode = GPIO_HL_MODE_INPUT;
-    // cfg.pull = GPIO_HL_PULL_UP;
+    cfg.outputType = GPIO_HL_OUTTYPE_PUSHPULL;
+    cfg.mode = GPIO_HL_MODE_INPUT;
+    cfg.pull = GPIO_HL_PULL_UP;
 // 
-    // HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_B, GPIO_HL_PIN_12, &cfg);
-    // HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_A, GPIO_HL_PIN_0, &cfg);
-    // HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_A, GPIO_HL_PIN_6, &cfg);
-    // HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_B, GPIO_HL_PIN_1, &cfg);
+    HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_B, GPIO_HL_PIN_12, &cfg);
+    HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_A, GPIO_HL_PIN_0, &cfg);
+    HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_A, GPIO_HL_PIN_7, &cfg);
+    HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_B, GPIO_HL_PIN_1, &cfg);
 
-/*
+
     HL_GPIO_EnableInterrupt(GPIO_HL_INSTANCE_PORT_B, GPIO_HL_PIN_12, 
                                                     GPIO_HL_EDGESTATE_FALLING);
     HL_GPIO_ConfigureCallback(GPIO_HL_INSTANCE_PORT_B, GPIO_HL_PIN_12, gpio_cb_12);
@@ -259,15 +321,15 @@ void main(void)
                                                     GPIO_HL_EDGESTATE_FALLING);
     HL_GPIO_ConfigureCallback(GPIO_HL_INSTANCE_PORT_A, GPIO_HL_PIN_0, gpio_cb_0);
 
-    HL_GPIO_EnableInterrupt(GPIO_HL_INSTANCE_PORT_A, GPIO_HL_PIN_6, 
+    HL_GPIO_EnableInterrupt(GPIO_HL_INSTANCE_PORT_A, GPIO_HL_PIN_7, 
                                                     GPIO_HL_EDGESTATE_FALLING);
-    HL_GPIO_ConfigureCallback(GPIO_HL_INSTANCE_PORT_A, GPIO_HL_PIN_6, gpio_cb_6);
+    HL_GPIO_ConfigureCallback(GPIO_HL_INSTANCE_PORT_A, GPIO_HL_PIN_7, gpio_cb_6);
 
     HL_GPIO_EnableInterrupt(GPIO_HL_INSTANCE_PORT_B, GPIO_HL_PIN_1, 
                                                     GPIO_HL_EDGESTATE_FALLING);
     HL_GPIO_ConfigureCallback(GPIO_HL_INSTANCE_PORT_B, GPIO_HL_PIN_1, gpio_cb_6);
 
-*/
+
 
     /*************************** DEBUG SECTION ********************************/
     //if (HL_APB2_EnableClock(BUS_HL_APB2_PERIPH_AFIO) != HL_SUCCESS)
@@ -300,9 +362,9 @@ void main(void)
    // }
 
 
-    GPIO_Config();
+    //GPIO_Config();
 
-    EXTI_ConfigHL();
+    //EXTI_ConfigHL();
 
     //EXTI_ConfigHL();
 
