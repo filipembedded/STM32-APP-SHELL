@@ -15,7 +15,7 @@
 #define assert_i2c_instance(instance) assert((instance == I2C_HL_INSTANCE_1)|| \
                                             (instance == I2C_HL_INSTANCE_2))
 
-
+#define I2C_HL_OWN_ADDRESS 0x00
 /********************************** Typedefs **********************************/
 typedef enum {
     I2C_HL_INSTANCE_1,
