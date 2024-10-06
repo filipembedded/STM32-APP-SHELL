@@ -4,6 +4,7 @@
         "stm32f1xx.h": "c",
         "stm32f1xx_ll_bus.h": "c",
         "gpio.h": "c",
-        "stm32f1xx_ll_gpio.h": "c"
+        "stm32f1xx_ll_gpio.h": "c",
+        "stm32f1xx_ll_i2c.h": "c"
     }
 }
