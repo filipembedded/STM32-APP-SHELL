@@ -63,7 +63,7 @@ hl_status_t HL_GPIO_Init(gpio_hl_instance_t instance,
     GPIO_TypeDef * stmPortInstance = prvHL_GPIO_GetSTMPort(instance);
 
     /* Check if clock already enabled */
-    if (HL_APB2_IsEnabledClock(BUS_HL_APB2_PERIPH_GPIOD) != HL_SET)
+    if (HL_APB2_IsEnabledClock(bus_instance) != HL_SET)
     {
         /* Enable if not */
         if (HL_APB2_EnableClock(bus_instance) != HL_SUCCESS)
