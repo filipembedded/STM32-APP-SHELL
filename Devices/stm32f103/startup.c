@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include "rcc.h"
 #include "swd.h"
+#include "util.h"
 
 #define SRAM_START (0x20000000U)
 #define SRAM_SIZE (20U * 1024U)
@@ -215,8 +216,11 @@ void Reset_Handler(void)
         // Enable Debug
         HL_SWD_Init();
     
-        // initialize Clocks with LL drivers 
-        HL_ClockConfigHSE();       
+        // Initialize Clocks with LL drivers 
+        HL_ClockConfigHSE();     
+
+        // Initialize Device time based on Timer2
+        //HL_UTIL_InitDeviceTimer2();  
 
         // Call main
         main();

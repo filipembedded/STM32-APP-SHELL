@@ -21,6 +21,8 @@
 
 uint32_t device_time_ms = 0;
 
+uint32_t tim2_dev_time = 0;
+
 /****************************** Callbacks *************************************/
 
 void I2C_Init(void) {
@@ -91,6 +93,10 @@ void I2C_SendByte(uint8_t slave_address, uint8_t data) {
 
 void main(void)
 {
+
+    /************************* Initialize device time *************************/
+    HL_UTIL_InitDeviceTimer2();
+
     /************************* Peripherals Initialization *********************/
 
     I2C_Init();

@@ -14,6 +14,10 @@
 static void prvI2C_InitPins(i2c_hl_instance_t instance);
 static void prvI2C_InitConfigStruct(i2c_hl_cfg_t *cfg);
 static I2C_TypeDef* prvI2C_GetSTMInstance(i2c_hl_instance_t instance);
+static hl_status_t prvI2C_WaitFlagSet(I2C_TypeDef *I2C, 
+                                      uint32_t (*flagCheckFunc)(I2C_TypeDef *),
+                                      uint32_t status,
+                                      uint32_t timeout_ms);
 
 /********************************** Definitions *******************************/
  
@@ -84,17 +88,69 @@ hl_status_t HL_I2C_MasterTransmit(i2c_hl_instance_t instance,
                                   uint32_t timeout_ms)
 {
     assert_instance(instance);
+
     /* Variables */
-    I2C_TypeDef *stmInstance = NULL;
+    I2C_TypeDef *stmInstance = prvI2C_GetSTMInstance(instance);
     uint32_t retransmissionCnt = 0;
 
     /* Send Start Condition */
     LL_I2C_GenerateStartCondition(stmInstance);
 
-    /* Wait for SB (Start Bit) flag to be set */
-    /*...*/
+    /* Wait for the bus to be free before start */
+    if (prvI2C_WaitFlagSet(stmInstance, LL_I2C_IsActiveFlag_BUSY, RESET,
+                                                    timeout_ms) != HL_SUCCESS)
+    {
+        return HL_ERROR;
+    }
 
+    /* Generate start condition */
+    LL_I2C_GenerateStartCondition(stmInstance);
 
+    /* Wait for the start condition to be generated */
+    if (prvI2C_WaitFlagSet(stmInstance, LL_I2C_IsActiveFlag_SB, SET,
+                                            timeout_ms) != HL_SUCCESS)
+    {
+        return HL_ERROR;
+    }
+
+    /* Send slave address (write mode) */
+    LL_I2C_TransmitData8(stmInstance, (slaveAddress << 1) & ~0x01);
+
+    /* Wait for address to be sent (ADDR flag) */
+    if (prvI2C_WaitFlagSet(stmInstance, LL_I2C_IsActiveFlag_ADDR, SET, 
+                                            timeout_ms) != HL_SUCCESS)
+    {
+        return HL_ERROR;
+    }
+
+    /* Clear ADDR flag by reading SR1 and SR2 */
+    LL_I2C_ClearFlag_ADDR(stmInstance);
+
+    /* Transmit data */
+    for (uint32_t i = 0; i < size; i++)
+    {
+        /* Wait for transmit buffer to be empty */
+        if (prvI2C_WaitFlagSet(stmInstance, LL_I2C_IsActiveFlag_TXE, SET,
+                                            timeout_ms) != HL_SUCCESS)
+        {
+            return HL_ERROR;
+        }
+
+        /* Send data byte */
+        LL_I2C_TransmitData8(stmInstance, pData[i]);
+    }
+
+    /* Wait until the data transfer finishes (TXE and BTF flags) */
+    if (prvI2C_WaitFlagSet(stmInstance, LL_I2C_IsActiveFlag_BTF, SET,
+                                            timeout_ms) != HL_SUCCESS)
+    {
+        return HL_ERROR;
+    }
+
+    /* Generate STOP condition */
+    LL_I2C_GenerateStopCondition(stmInstance);
+
+    return HL_SUCCESS;
 }
 
 hl_status_t HL_I2C_MasterReceive(i2c_hl_instance_t instance,
@@ -154,4 +210,20 @@ static I2C_TypeDef* prvI2C_GetSTMInstance(i2c_hl_instance_t instance)
     
     if (instance == I2C_HL_INSTANCE_2)
         return I2C2;
+}
+
+static hl_status_t prvI2C_WaitFlagSet(I2C_TypeDef *I2Cx, 
+                                      uint32_t (*flagCheckFunc)(I2C_TypeDef *),
+                                      uint32_t status,
+                                      uint32_t timeout_ms)
+{
+    /* Get current device time */
+    uint32_t dev_time = HL_GetDeviceTime();
+    while (flagCheckFunc(I2Cx) != status)
+    {
+        /* Check for timeout */
+        if ((HL_GetDeviceTime() - dev_time) >= timeout_ms)
+            return HL_ERROR;
+    }
+    return HL_SUCCESS;
 }
