@@ -3,7 +3,7 @@
  * @brief High-Layer driver for I2C
  * @author filipembedded
  */
-
+#include <stdlib.h>
 #include "i2c.h"
 #include "gpio.h"
 #include "bus.h"
@@ -63,11 +63,18 @@ hl_status_t HL_I2C_Init(i2c_hl_instance_t instance, uint32_t clockSpeed)
 
     LL_I2C_Init(stmInstance, &cfg);
     LL_I2C_Enable(stmInstance);
+
+    return HL_SUCCESS;
 }
 
 void HL_I2C_DeInit(i2c_hl_instance_t instance)
 {
+    assert_i2c_instance(instance);
 
+    I2C_TypeDef *stmInstance;
+    stmInstance = prvI2C_GetSTMInstance(instance);
+
+    LL_I2C_DeInit(stmInstance);
 }
 
 hl_status_t HL_I2C_MasterTransmit(i2c_hl_instance_t instance,
@@ -76,6 +83,17 @@ hl_status_t HL_I2C_MasterTransmit(i2c_hl_instance_t instance,
                                   uint32_t size,
                                   uint32_t timeout_ms)
 {
+    assert_instance(instance);
+    /* Variables */
+    I2C_TypeDef *stmInstance = NULL;
+    uint32_t retransmissionCnt = 0;
+
+    /* Send Start Condition */
+    LL_I2C_GenerateStartCondition(stmInstance);
+
+    /* Wait for SB (Start Bit) flag to be set */
+    /*...*/
+
 
 }
 
