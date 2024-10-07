@@ -20,6 +20,8 @@
 
 uint32_t device_time_ms = 0;
 
+uint32_t tim2_dev_time = 0;
+
 /****************************** Callbacks *************************************/
 void gpio_cb_0(void);
 void gpio_cb_6(void);
@@ -47,16 +49,17 @@ void EXTI_ConfigHL()
 
 void main(void)
 {
+
+
     /************************* Peripherals Initialization *********************/
     //GPIO
-     gpio_hl_cfg_t cfg;
-     cfg.mode       = GPIO_HL_MODE_OUTPUT;
-     cfg.outputType = GPIO_HL_OUTTYPE_OPENDRAIN;
-     cfg.pull       = GPIO_HL_PULL_UP;
-     cfg.speed      = GPIO_HL_SPEED_50MHz;
-
-     HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_C, GPIO_HL_PIN_13, &cfg);
-     HL_GPIO_SetPinValue(GPIO_HL_INSTANCE_PORT_C, GPIO_HL_PIN_13, GPIO_HL_SET);
+    gpio_hl_cfg_t cfg;
+    cfg.mode       = GPIO_HL_MODE_OUTPUT;
+    cfg.outputType = GPIO_HL_OUTTYPE_OPENDRAIN;
+    cfg.pull       = GPIO_HL_PULL_UP;
+    cfg.speed      = GPIO_HL_SPEED_50MHz;
+    HL_GPIO_Init(GPIO_HL_INSTANCE_PORT_C, GPIO_HL_PIN_13, &cfg);
+    HL_GPIO_SetPinValue(GPIO_HL_INSTANCE_PORT_C, GPIO_HL_PIN_13, GPIO_HL_SET);
 // 
     cfg.outputType = GPIO_HL_OUTTYPE_PUSHPULL;
     cfg.mode = GPIO_HL_MODE_INPUT;
@@ -88,12 +91,21 @@ void main(void)
     HL_GPIO_EnableInterrupt(GPIO_HL_INSTANCE_PORT_C, GPIO_HL_PIN_15, 
                                                     GPIO_HL_EDGESTATE_FALLING);
     HL_GPIO_ConfigureCallback(GPIO_HL_INSTANCE_PORT_C, GPIO_HL_PIN_15, gpio_cb_15);
-
+    
+    
+    /************************* Initialize device time *************************/
+    HL_UTIL_InitDeviceTimer2();
+    
+    /* Last wake time */
+    tim2_dev_time = HL_GetDeviceTime();
 
     while(1)
     {
-
-    
+        if ((HL_GetDeviceTime()-tim2_dev_time) >= 500)
+        {
+            HL_GPIO_TogglePin(GPIO_HL_INSTANCE_PORT_C, GPIO_HL_PIN_13);
+            tim2_dev_time = HL_GetDeviceTime();
+        }
     }
 }
 
