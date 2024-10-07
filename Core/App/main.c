@@ -50,6 +50,8 @@ void EXTI_ConfigHL()
 void main(void)
 {
 
+    /************************* Initialize device time *************************/
+    HL_UTIL_InitDeviceTimer2();
 
     /************************* Peripherals Initialization *********************/
     //GPIO
@@ -93,8 +95,6 @@ void main(void)
     HL_GPIO_ConfigureCallback(GPIO_HL_INSTANCE_PORT_C, GPIO_HL_PIN_15, gpio_cb_15);
     
     
-    /************************* Initialize device time *************************/
-    HL_UTIL_InitDeviceTimer2();
     
     /* Last wake time */
     tim2_dev_time = HL_GetDeviceTime();
