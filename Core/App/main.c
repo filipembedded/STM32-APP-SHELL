@@ -6,6 +6,7 @@
 #include "swd.h"
 #include "gpio.h"
 #include "bus.h"
+#include "i2c.h"
 #include "stm32f1xx_ll_gpio.h"
 #include "stm32f1xx_ll_rcc.h"
 #include "stm32f1xx_ll_bus.h"
@@ -22,6 +23,9 @@
 uint32_t device_time_ms = 0;
 
 uint32_t tim2_dev_time = 0;
+
+#define SLAVE_ADDRESS 0x05
+
 
 /****************************** Callbacks *************************************/
 
@@ -65,31 +69,7 @@ void I2C_Init(void) {
     LL_I2C_Enable(I2C1);
 }
 
-void I2C_SendByte(uint8_t slave_address, uint8_t data) {
-    // Wait until I2C1 is ready for communication
-    while (!LL_I2C_IsActiveFlag_SB(I2C1)) {
-        LL_I2C_GenerateStartCondition(I2C1);  // Generate Start condition
-    }
 
-    // Send Slave address (shifted left by 1 and last bit set to 0 for Write)
-    LL_I2C_TransmitData8(I2C1, (slave_address << 1));
-
-    // Wait for address to be acknowledged
-    while (!LL_I2C_IsActiveFlag_ADDR(I2C1));
-    LL_I2C_ClearFlag_ADDR(I2C1);  // Clear the ADDR flag
-
-    // Wait until the transmit data register is empty
-    while (!LL_I2C_IsActiveFlag_TXE(I2C1));
-
-    // Send the data byte
-    LL_I2C_TransmitData8(I2C1, data);
-
-    // Wait until byte transfer is finished
-    while (!LL_I2C_IsActiveFlag_BTF(I2C1));
-
-    // Generate Stop condition
-    LL_I2C_GenerateStopCondition(I2C1);
-}
 
 void main(void)
 {
@@ -98,17 +78,18 @@ void main(void)
     HL_UTIL_InitDeviceTimer2();
 
     /************************* Peripherals Initialization *********************/
-
-    I2C_Init();
+    //HL_APB1_DisableClock(BUS_HL_APB1_PERIPH_I2C1);
+    if (HL_I2C_Init(I2C_HL_INSTANCE_2, 100000) != HL_SUCCESS)
+    {
+        for (;;);
+    }
     
-    uint8_t dummy_data = 0xAA;  // Dummy data to be sent
-    uint8_t slave_address = 0b10101010;  // Replace with actual slave address
+    uint8_t baba[] = {0x0b, 0x0a, 0x0b, 0x0a};
 
     while (1) {
         // Send dummy data to slave device
-        I2C_SendByte(slave_address, dummy_data);
-
-        //LL_I2C_TransmitData8(I2C1, dummy_data);
+        HL_I2C_MasterTransmit(I2C_HL_INSTANCE_1, SLAVE_ADDRESS, baba, 
+                                                            sizeof(baba), 500);
 
         // Wait for 500 ms before sending the next byte
         LL_mDelay(500);

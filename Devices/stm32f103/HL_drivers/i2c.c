@@ -40,7 +40,7 @@ hl_status_t HL_I2C_Init(i2c_hl_instance_t instance, uint32_t clockSpeed)
                 return HL_ERROR;
         }
     } else {
-        if (HL_APB1_IsEnabledClock(BUS_HL_APB1_PERIPH_I2C1) != HL_SET)
+        if (HL_APB1_IsEnabledClock(BUS_HL_APB1_PERIPH_I2C2) != HL_SET)
         {
             if (HL_APB1_EnableClock(BUS_HL_APB1_PERIPH_I2C2) != HL_SUCCESS)
                 return HL_ERROR;
@@ -48,7 +48,7 @@ hl_status_t HL_I2C_Init(i2c_hl_instance_t instance, uint32_t clockSpeed)
     }
 
     /* Initialize pins for certain I2C instance */
-    prvI2C_InitPins(instance);
+    //prvI2C_InitPins(instance);
 
     /* Configure and Initialize I2C peripheral */
     i2c_hl_cfg_t hl_cfg;
@@ -93,30 +93,29 @@ hl_status_t HL_I2C_MasterTransmit(i2c_hl_instance_t instance,
     I2C_TypeDef *stmInstance = prvI2C_GetSTMInstance(instance);
     uint32_t retransmissionCnt = 0;
 
-    /* Send Start Condition */
-    LL_I2C_GenerateStartCondition(stmInstance);
 
-    /* Wait for the bus to be free before start */
+    /* Wait for the bus to be free before start - Is SR2 register busy? */
     if (prvI2C_WaitFlagSet(stmInstance, LL_I2C_IsActiveFlag_BUSY, RESET,
                                                     timeout_ms) != HL_SUCCESS)
     {
         return HL_ERROR;
     }
 
-    /* Generate start condition */
+    /* Generate start condition - Set SB bit in SR1 register */
     LL_I2C_GenerateStartCondition(stmInstance);
 
-    /* Wait for the start condition to be generated */
+    /* Wait for the start condition to be generated - Is SB bit set in SR1? */
     if (prvI2C_WaitFlagSet(stmInstance, LL_I2C_IsActiveFlag_SB, SET,
                                             timeout_ms) != HL_SUCCESS)
     {
         return HL_ERROR;
     }
 
-    /* Send slave address (write mode) */
+    /* Send slave address (write mode) - Write data to the DR register with
+        write bit - 0 */
     LL_I2C_TransmitData8(stmInstance, (slaveAddress << 1) & ~0x01);
 
-    /* Wait for address to be sent (ADDR flag) */
+    /* Wait for address to be sent (ADDR flag) - Is ADDR flag set in SR1? */
     if (prvI2C_WaitFlagSet(stmInstance, LL_I2C_IsActiveFlag_ADDR, SET, 
                                             timeout_ms) != HL_SUCCESS)
     {
@@ -159,7 +158,160 @@ hl_status_t HL_I2C_MasterReceive(i2c_hl_instance_t instance,
                                   uint32_t size,
                                   uint32_t timeout_ms)
 {
+    assert_instance(instance);
 
+    uint32_t tmpSize = size;
+
+    /* Variables */
+    I2C_TypeDef *stmInstance = prvI2C_GetSTMInstance(instance);
+
+    /* Wait until the bus is free - Check BUSY flag in SR2 */
+    if (prvI2C_WaitFlagSet(stmInstance, LL_I2C_IsActiveFlag_BUSY, RESET,
+                                        timeout_ms) != HL_SUCCESS)
+    {
+        return HL_ERROR;
+    }
+
+    /* Generate START condition - Set SB bit in SR1 register */
+    LL_I2C_GenerateStartCondition(stmInstance);
+
+    /* Wait until start condition is being generated - Is SB bit set in SR1 */
+    if (prvI2C_WaitFlagSet(stmInstance, LL_I2C_IsActiveFlag_SB, SET, 
+                                                    timeout_ms) != HL_SUCCESS)
+    {
+        return HL_ERROR;
+    }
+
+    /* Send slave address (read mode) - Write address to the DR register with 
+    read bit set */
+    LL_I2C_TransmitData8(stmInstance, (slaveAddress << 1) | 0x01);
+
+    /* Receive data on the way appropriate to the number of bytes received */
+    switch (size)
+    {
+        case 1:
+            /* Special case for receiving exactly one byte */
+            LL_I2C_AcknowledgeNextData(stmInstance, LL_I2C_NACK);
+
+            /* Wait for address to be completely sent - Is ADDR bit set in SR1*/
+            if (prvI2C_WaitFlagSet(stmInstance, LL_I2C_IsActiveFlag_ADDR, SET,
+                                                    timeout_ms) != HL_SUCCESS)
+            {
+                return HL_ERROR;
+            }
+
+            LL_I2C_ClearFlag_ADDR(stmInstance);
+            LL_I2C_GenerateStopCondition(stmInstance);
+
+            /* Wait for RXNE flag - Data is ready */
+            if (prvI2C_WaitFlagSet(stmInstance, LL_I2C_IsActiveFlag_RXNE, SET,
+                                                        timeout_ms) != HL_SUCCESS)
+            {
+                return HL_ERROR;
+            }
+
+            /* Read the data after the RXNE is set */
+            *pData = LL_I2C_ReceiveData8(stmInstance);
+            break;
+        case 2:
+            /* Special case for receiving exactly two bytes */
+            LL_I2C_EnableBitPOS(stmInstance);
+            LL_I2C_AcknowledgeNextData(stmInstance, LL_I2C_ACK);
+
+            /* Wait for address to be completely sent - Is ADDR bit set in SR1*/
+            if (prvI2C_WaitFlagSet(stmInstance, LL_I2C_IsActiveFlag_ADDR, SET,
+                                                    timeout_ms) != HL_SUCCESS)
+            {
+                return HL_ERROR;
+            }
+
+            LL_I2C_ClearFlag_ADDR(stmInstance);
+            LL_I2C_AcknowledgeNextData(stmInstance, LL_I2C_NACK);
+
+            /* Wait for BTF to be set */
+            if (prvI2C_WaitFlagSet(stmInstance, LL_I2C_IsActiveFlag_BTF, SET,
+                                                    timeout_ms) != HL_SUCCESS)
+            {
+                return HL_ERROR;
+            }
+
+            /* Generate STOP condition */
+            LL_I2C_GenerateStopCondition(stmInstance);
+
+            pData[1] = LL_I2C_ReceiveData8(stmInstance);
+            pData[0] = LL_I2C_ReceiveData8(stmInstance);
+            
+            break;
+        default:
+            /* General case of receiving more than 2 bytes of data */
+            LL_I2C_AcknowledgeNextData(stmInstance, LL_I2C_ACK);
+
+            /* Wait for the ADDR flag to be set */
+            if (prvI2C_WaitFlagSet(stmInstance, LL_I2C_IsActiveFlag_ADDR, SET,
+                                                    timeout_ms) != HL_SUCCESS)
+            {
+                return HL_ERROR;
+            }
+
+            /* Clear ADDR flag */
+            LL_I2C_ClearFlag_ADDR(stmInstance);
+
+            /* Read bytes before last 3 bytes */
+            while (tmpSize > 3)
+            {
+                if (prvI2C_WaitFlagSet(stmInstance, LL_I2C_IsActiveFlag_RXNE,
+                                        SET, timeout_ms) != HL_SUCCESS)
+                {
+                    return HL_ERROR;
+                }
+                *pData++ = LL_I2C_ReceiveData8(stmInstance);
+                tmpSize--;
+            }
+
+            /* Handle the last 3 bytes receive sequence */
+
+            /* RXNE bit set */
+            if (prvI2C_WaitFlagSet(stmInstance, LL_I2C_IsActiveFlag_RXNE, 
+                                        SET, timeout_ms) != HL_SUCCESS)
+            {
+                return HL_ERROR;
+            }
+
+            /* BTF bit set - data N-2 in DR and N-1 in shift register, SCL low*/
+            if (prvI2C_WaitFlagSet(stmInstance, LL_I2C_IsActiveFlag_BTF, 
+                                        SET, timeout_ms) != HL_SUCCESS)
+            {
+                return HL_ERROR;
+            }
+
+            LL_I2C_AcknowledgeNextData(stmInstance, LL_I2C_ACK);
+
+            /* Read data N-2 */
+            *pData++ = LL_I2C_ReceiveData8(stmInstance);
+
+            LL_I2C_AcknowledgeNextData(stmInstance, LL_I2C_ACK);
+
+            /* Read data N-1 */
+            *pData++ = LL_I2C_ReceiveData8(stmInstance);
+
+            LL_I2C_AcknowledgeNextData(stmInstance, LL_I2C_NACK);
+             
+            /* RXNE bit set */
+            if (prvI2C_WaitFlagSet(stmInstance, LL_I2C_IsActiveFlag_RXNE, 
+                                        SET, timeout_ms) != HL_SUCCESS)
+            {
+                return HL_ERROR;
+            } 
+
+
+            /* Read data N */
+            *pData++ = LL_I2C_ReceiveData8(stmInstance);          
+
+            break;
+    }
+
+    /* Generate STOP condition */
+    LL_I2C_GenerateStopCondition(stmInstance);
 }
 
 
