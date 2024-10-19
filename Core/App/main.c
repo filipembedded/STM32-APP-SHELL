@@ -34,6 +34,11 @@ void I2C_Init(void) {
     LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOB);  // Enable GPIOB clock
     LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_I2C1);   // Enable I2C1 clock
 
+    if (LL_APB1_GRP1_IsEnabledClock(LL_APB1_GRP1_PERIPH_I2C1) != 1)
+    {
+        for (;;);
+    }
+
     // Step 2: Configure GPIO Pins PB6 (SCL) and PB7 (SDA)
     LL_GPIO_InitTypeDef gpio_initstruct = {0};
     
@@ -79,11 +84,40 @@ void main(void)
 
     /************************* Peripherals Initialization *********************/
     //HL_APB1_DisableClock(BUS_HL_APB1_PERIPH_I2C1);
-    if (HL_I2C_Init(I2C_HL_INSTANCE_2, 100000) != HL_SUCCESS)
+    
+    // if (HL_I2C_Init(I2C_HL_INSTANCE_2, 100000) != HL_SUCCESS)
+    // {
+    //     for (;;);
+    // }
+    // 
+    // I2C_Init();
+    
+
+
+
+
+    
+    LL_APB1_GRP1_EnableClock(BUS_HL_APB1_PERIPH_I2C1);
+
+    if (LL_AHB1_GRP1_IsEnabledClock(LL_APB1_GRP1_PERIPH_I2C1) == 1)
+        for (;;);
+
+    uint32_t status_ll = LL_APB1_GRP1_IsEnabledClock(LL_APB1_GRP1_PERIPH_I2C1);
+
+    
+    if (status_ll == 1)
     {
         for (;;);
     }
     
+
+
+    if (status == HL_ERROR)
+        for(;;);
+
+    
+
+
     uint8_t baba[] = {0x0b, 0x0a, 0x0b, 0x0a};
 
     while (1) {
