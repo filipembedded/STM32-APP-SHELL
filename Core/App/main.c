@@ -78,46 +78,16 @@ void I2C_Init(void) {
 
 void main(void)
 {
-
     /************************* Initialize device time *************************/
     HL_UTIL_InitDeviceTimer2();
 
     /************************* Peripherals Initialization *********************/
-    //HL_APB1_DisableClock(BUS_HL_APB1_PERIPH_I2C1);
-    
-    // if (HL_I2C_Init(I2C_HL_INSTANCE_2, 100000) != HL_SUCCESS)
-    // {
-    //     for (;;);
-    // }
-    // 
-    // I2C_Init();
-    
-
-
-
-
-
-    LL_APB1_GRP1_EnableClock(BUS_HL_APB1_PERIPH_I2C1);
-
-    /* 
-        1. Sranje koje ne radi
-    */
-    if (LL_AHB1_GRP1_IsEnabledClock(LL_APB1_GRP1_PERIPH_I2C1) == 1)
-        for (;;);
-
-    /*
-        2. Sranje koje radi
-    */
-    uint32_t status_ll = LL_APB1_GRP1_IsEnabledClock(LL_APB1_GRP1_PERIPH_I2C1);
-    
-    if (status_ll == 1)
+    // I2C1
+    if (HL_I2C_Init(I2C_HL_INSTANCE_1, 100000) != HL_SUCCESS)
     {
         for (;;);
     }
     
-
-
-
     uint8_t baba[] = {0x0b, 0x0a, 0x0b, 0x0a};
 
     while (1) {

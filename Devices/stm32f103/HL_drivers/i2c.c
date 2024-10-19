@@ -48,7 +48,7 @@ hl_status_t HL_I2C_Init(i2c_hl_instance_t instance, uint32_t clockSpeed)
     }
 
     /* Initialize pins for certain I2C instance */
-    //prvI2C_InitPins(instance);
+    prvI2C_InitPins(instance);
 
     /* Configure and Initialize I2C peripheral */
     i2c_hl_cfg_t hl_cfg;
