@@ -96,14 +96,19 @@ void main(void)
 
 
 
-    
+
     LL_APB1_GRP1_EnableClock(BUS_HL_APB1_PERIPH_I2C1);
 
+    /* 
+        1. Sranje koje ne radi
+    */
     if (LL_AHB1_GRP1_IsEnabledClock(LL_APB1_GRP1_PERIPH_I2C1) == 1)
         for (;;);
 
+    /*
+        2. Sranje koje radi
+    */
     uint32_t status_ll = LL_APB1_GRP1_IsEnabledClock(LL_APB1_GRP1_PERIPH_I2C1);
-
     
     if (status_ll == 1)
     {
@@ -111,11 +116,6 @@ void main(void)
     }
     
 
-
-    if (status == HL_ERROR)
-        for(;;);
-
-    
 
 
     uint8_t baba[] = {0x0b, 0x0a, 0x0b, 0x0a};
